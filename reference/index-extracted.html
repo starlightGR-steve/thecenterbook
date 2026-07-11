@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Center Book - Built for Tutoring Centers</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Oooh+Baby&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary:#355caa;--primary-light:#CFD5E3;--primary-ultra-light:#EDF0F5;
+  --primary-dark:#2a4a88;--primary-ultra-dark:#1e3566;
+  --secondary:#00ABBD;--secondary-light:#C6E8EC;--secondary-ultra-light:#E8F5F7;
+  --secondary-dark:#005260;--secondary-text:#007985;
+  --tertiary:#4a9ac2;--tertiary-ultra-light:#EBF1F4;
+  --accent:#E0712C;--accent-dark:#c55f22;--accent-text:#b85a1a;--accent-light:#f5a06a;--accent-ultra-light:#FDF5F0;
+  --neutral:#57727c;--base:#f2f2f2;--text:#303030;--text-light:#5a5a5a;--white:#fff;
+  --font-primary:'Montserrat','Century Gothic',sans-serif;--font-script:'Oooh Baby',cursive;
+  --max:1140px;--gap:clamp(80px,10vw,140px);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{font-size:clamp(15px,1vw+0.5rem,18px);scroll-behavior:smooth}
+body{font-family:var(--font-primary);font-weight:500;color:var(--text);line-height:1.7;background:var(--white);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+
+/* TYPOGRAPHY - ADA compliant color assignments */
+.script{font-family:var(--font-script);font-weight:400;-webkit-text-stroke:1px currentColor;paint-order:stroke fill;line-height:1.2}
+.script-hero{font-size:clamp(2.5rem,5vw,3.8rem)}
+.script-xl{font-size:clamp(2rem,4vw,3rem)}
+.script-lg{font-size:clamp(1.6rem,3vw,2.2rem)}
+.eyebrow{font-size:.72rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:.8rem;display:block}
+.headline{font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:800;color:var(--primary);line-height:1.12;margin-bottom:1rem}
+.subhead{font-size:1rem;color:var(--text-light);line-height:1.7;max-width:540px;margin-bottom:2rem}
+.centered{text-align:center}.centered .subhead{margin-left:auto;margin-right:auto}
+.curve{display:block;margin:0 auto;width:80px;height:20px;border:none;border-bottom:2.5px solid var(--accent-light);border-radius:0 0 50% 50%;margin-top:.5rem;margin-bottom:2.5rem}
+.curve-left{margin-left:0}
+
+/* BUTTONS - two types: founding (primary) and demo (secondary) */
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.9rem 2.2rem;border-radius:6px;font-weight:700;font-size:.9rem;text-decoration:none;transition:all .25s;justify-content:center;border:2.5px solid transparent}
+.btn-founding{background:var(--accent);color:#fff;border-color:var(--accent)}.btn-founding:hover{background:var(--accent-dark);border-color:var(--accent-dark);transform:translateY(-2px);box-shadow:0 6px 20px rgba(224,113,44,.25)}
+.btn-demo{background:transparent;color:var(--primary);border-color:var(--primary)}.btn-demo:hover{background:var(--primary);color:#fff;transform:translateY(-2px)}
+.btn-white{background:#fff;color:var(--primary);border-color:#fff}.btn-white:hover{background:transparent;color:#fff;transform:translateY(-2px)}
+.btn-full{width:100%;max-width:480px;margin:0 auto;display:flex;padding:1.1rem 2rem;font-size:1rem;border-radius:8px}
+
+/* NAV */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,.97);backdrop-filter:blur(12px);border-bottom:1px solid rgba(53,92,170,.06);transition:box-shadow .3s}
+.nav.scrolled{box-shadow:0 2px 20px rgba(0,0,0,.06)}
+.nav-inner{max-width:var(--max);margin:0 auto;padding:.8rem 1.5rem;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{text-decoration:none;display:flex;align-items:center}.nav-logo svg{height:36px;width:auto}
+.nav-links{display:flex;align-items:center;gap:2rem;list-style:none}
+.nav-links a{text-decoration:none;color:var(--text);font-weight:500;font-size:.85rem}.nav-links a:hover{color:var(--secondary-text)}
+.nav-cta{background:var(--accent);color:#fff!important;padding:.5rem 1.2rem;border-radius:6px;font-weight:700!important}
+
+/* DECORATIVE */
+.blob{position:absolute;border-radius:50%;pointer-events:none;z-index:0}
+.dots{position:absolute;pointer-events:none;opacity:.12;background-image:radial-gradient(circle,var(--neutral) 1.5px,transparent 1.5px);background-size:14px 14px}
+
+/* SECTIONS */
+.section{padding:var(--gap) 1.5rem;position:relative;overflow:hidden}
+.section-inner{max-width:var(--max);margin:0 auto;position:relative;z-index:1}
+
+/* TWO-COL FEATURE */
+.feature-split{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+.feature-split.reverse .feat-text{order:2}.feature-split.reverse .feat-visual{order:1}
+
+/* Feature points with BIGGER icons */
+.feat-points{display:flex;flex-direction:column;gap:1rem;margin-bottom:2rem}
+.feat-point{display:flex;gap:1rem;align-items:flex-start;font-size:.9rem;color:var(--text-light);line-height:1.6}
+.feat-point-icon{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.feat-point-icon.teal{background:var(--white);border:1.5px solid var(--secondary-light);box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.feat-point-icon.blue{background:var(--white);border:1.5px solid var(--primary-light);box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.feat-point-icon.orange{background:var(--white);border:1.5px solid var(--accent-light);box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.feat-point-icon.tertiary{background:var(--white);border:1.5px solid var(--tertiary);box-shadow:0 2px 8px rgba(0,0,0,.04)}
+
+/* Visual with blob */
+.feat-visual{position:relative}.feat-visual .blob{width:110%;height:110%;top:-5%;left:-5%}
+.feat-screenshot{position:relative;z-index:1;border-radius:20px;overflow:hidden;box-shadow:0 16px 48px rgba(53,92,170,.1);min-height:360px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:.5rem;color:var(--neutral);font-size:.75rem;font-weight:600;background:var(--white);border:1px solid rgba(0,0,0,.05)}
+.float-el{position:absolute;z-index:2;background:var(--white);border-radius:14px;padding:.7rem 1rem;box-shadow:0 6px 20px rgba(0,0,0,.08);font-size:.68rem;font-weight:600;display:flex;align-items:center;gap:.5rem;border:1px solid rgba(0,0,0,.04)}
+
+/* TESTIMONIAL BREAK */
+.testi-break{padding:4rem 1.5rem;position:relative}
+.testi-card{max-width:700px;margin:0 auto;background:var(--white);border-radius:20px;padding:3.2rem 2.5rem 2.4rem;text-align:center;position:relative;box-shadow:0 20px 55px rgba(53,92,170,.10);border:1px solid rgba(0,0,0,.05)}
+.testi-card::before{content:'';position:absolute;inset:-10px;border:2px dotted rgba(0,171,189,.2);border-radius:24px;pointer-events:none}.testi-mark{display:block;font-family:Georgia,'Times New Roman',serif;font-size:4.2rem;line-height:.1;height:1.7rem;color:rgba(0,171,189,.35)}.testi-person{display:flex;align-items:center;justify-content:center;gap:.7rem;margin-top:1.7rem}.testi-avatar{width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,var(--secondary),var(--primary));color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.9rem;letter-spacing:.5px;flex:0 0 auto}.testi-meta{text-align:left}.testi-name{display:block;font-weight:700;font-size:.92rem;color:var(--text)}.testi-role{display:block;font-size:.7rem;font-weight:700;color:var(--secondary-text);letter-spacing:1.2px;text-transform:uppercase}
+.testi-card blockquote{font-size:1.05rem;color:var(--text);line-height:1.75;margin-bottom:1.2rem}.testi-card blockquote strong{color:var(--primary)}
+.testi-card cite{font-size:.75rem;font-weight:700;color:var(--secondary-text);letter-spacing:1.5px;text-transform:uppercase;font-style:normal}
+
+/* WHO IS THIS FOR */
+.who-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin:2.5rem 0}
+.who-card{background:var(--white);border-radius:20px;padding:2rem 1.5rem;border:2px solid var(--secondary-ultra-light);text-align:center;transition:border-color .3s,transform .3s}
+.who-card:hover{border-color:var(--secondary-light);transform:translateY(-4px)}
+.who-card h4{font-size:.9rem;font-weight:700;color:var(--primary);margin-bottom:1rem;padding-bottom:.7rem;border-bottom:2px solid var(--accent-light)}
+.who-card li{font-size:.85rem;color:var(--text-light);padding:.35rem 0;list-style:none}
+
+/* INCLUDED SECTION - visual checklist like FGF */
+.included-visual{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start;margin:2.5rem 0}
+.included-diagram{background:linear-gradient(135deg,var(--primary-ultra-light),var(--secondary-ultra-light));border-radius:20px;padding:2.5rem;text-align:center;position:relative;min-height:400px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem}
+.diagram-ring{width:200px;height:200px;border-radius:50%;border:3px solid rgba(53,92,170,.15);display:flex;align-items:center;justify-content:center;position:relative}
+.diagram-ring-inner{width:130px;height:130px;border-radius:50%;background:linear-gradient(135deg,var(--primary),var(--secondary-dark));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:1rem;text-align:center;line-height:1.3;padding:1rem}
+.diagram-node{position:absolute;background:var(--white);border-radius:10px;padding:.4rem .7rem;font-size:.6rem;font-weight:700;color:var(--primary);box-shadow:0 2px 8px rgba(0,0,0,.06);border:1px solid rgba(53,92,170,.08)}
+.diagram-node:nth-child(2){top:-10px;left:50%;transform:translateX(-50%)}
+.diagram-node:nth-child(3){right:-20px;top:50%;transform:translateY(-50%)}
+.diagram-node:nth-child(4){bottom:-10px;left:50%;transform:translateX(-50%)}
+.diagram-node:nth-child(5){left:-20px;top:50%;transform:translateY(-50%)}
+.diagram-label{font-size:.78rem;font-weight:600;color:var(--text-light);margin-top:.5rem}
+
+.included-checks{display:flex;flex-direction:column;gap:.5rem}
+.check-group-title{font-size:.8rem;font-weight:800;color:var(--primary);text-transform:uppercase;letter-spacing:1px;margin-top:1.2rem;margin-bottom:.4rem;padding-bottom:.3rem;border-bottom:2px solid var(--accent-light);display:inline-block}
+.check-group-title:first-child{margin-top:0}
+.check-item{display:flex;align-items:center;gap:.6rem;padding:.35rem 0;font-size:.82rem;color:var(--text)}
+.check-icon{width:22px;height:22px;border-radius:5px;background:var(--secondary-ultra-light);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+
+/* SOCIAL PROOF */
+.social-proof{background:linear-gradient(135deg,var(--secondary-ultra-light),#dff0f2);padding:2.2rem 1.5rem}
+.sp-inner{max-width:var(--max);margin:0 auto;display:flex;align-items:center;justify-content:center;gap:3rem;flex-wrap:wrap}
+.sp-stat{text-align:center}.sp-num{font-size:1.8rem;font-weight:800;color:var(--primary)}.sp-label{font-size:.72rem;color:var(--neutral);font-weight:500}
+.sp-div{width:1px;height:40px;background:rgba(0,171,189,.15)}
+.sp-quote{max-width:380px;font-size:.82rem;color:var(--text-light);font-style:italic;line-height:1.6;padding-left:1rem;border-left:3px solid var(--accent-light)}
+.sp-quote cite{display:block;font-style:normal;font-weight:600;color:var(--text);margin-top:.4rem;font-size:.72rem}
+
+/* FOUNDING */
+.founding-benefits{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin:2.5rem 0}
+.founding-benefit{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:1.8rem;text-align:left}
+.founding-benefit .benefit-icon{width:48px;height:48px;border-radius:12px;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;margin-bottom:.8rem}
+.founding-benefit h4{font-size:.95rem;font-weight:700;color:#fff;margin-bottom:.4rem}.founding-benefit p{font-size:.8rem;color:rgba(255,255,255,.65);line-height:1.6}
+
+/* ORIGIN STORY */
+.pain-stack{background:var(--white);border-radius:16px;padding:2rem;border-left:4px solid var(--secondary-text);box-shadow:0 4px 16px rgba(53,92,170,.05)}
+.pain-stack h3{font-size:.88rem;font-weight:700;color:var(--primary);margin-bottom:1.2rem;padding-bottom:.6rem;border-bottom:2px solid var(--secondary-ultra-light)}
+.pain-item{display:flex;gap:.8rem;align-items:flex-start;padding:.7rem 0;border-bottom:1px solid var(--base)}.pain-item:last-of-type{border-bottom:none}
+.pain-item-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;background:var(--white);border:1.5px solid var(--base);box-shadow:0 2px 6px rgba(0,0,0,.03)}
+.pain-item:nth-child(odd) .pain-item-icon{border-color:var(--secondary-light)}
+.pain-item:nth-child(even) .pain-item-icon{border-color:var(--accent-light)}
+.pain-item-text strong{font-size:.8rem;color:var(--text);display:block}.pain-item-text span{font-size:.72rem;color:var(--neutral)}
+
+/* BG COLORS */
+.bg-white{background:var(--white)}
+.bg-cool{background:linear-gradient(180deg,#f7fbfc 0%,var(--secondary-ultra-light) 50%,#f7fbfc 100%)}
+.bg-warm{background:linear-gradient(180deg,#fefaf7 0%,var(--accent-ultra-light) 50%,#fefaf7 100%)}
+.bg-blue{background:linear-gradient(180deg,#f5f7fb 0%,var(--primary-ultra-light) 50%,#f5f7fb 100%)}
+.bg-muted{background:#eef1f0}
+.bg-dark{background:linear-gradient(160deg,var(--primary-ultra-dark) 0%,var(--primary-dark) 50%,var(--secondary-dark) 100%);color:#fff}
+.bg-dark .headline{color:#fff}.bg-dark .subhead{color:rgba(255,255,255,.7)}
+
+/* FOOTER */
+.footer{background:linear-gradient(180deg,#1e2a3a,#15202e);color:rgba(255,255,255,.7);padding:3rem 1.5rem 1.5rem}
+.footer-inner{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr;gap:2rem}
+.footer-brand p{font-size:.75rem;line-height:1.6;margin-top:.8rem;max-width:280px}.footer-brand svg{height:30px;width:auto;margin-bottom:.5rem}
+.footer h4{color:#fff;font-size:.78rem;font-weight:600;margin-bottom:1rem}
+.footer ul{list-style:none}.footer li{margin-bottom:.5rem}.footer a{color:rgba(255,255,255,.6);text-decoration:none;font-size:.75rem}.footer a:hover{color:var(--secondary-light)}
+.footer-bottom{max-width:var(--max);margin:2rem auto 0;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,.08);display:flex;justify-content:space-between;font-size:.68rem}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .feature-split{grid-template-columns:1fr;gap:2rem}.feature-split.reverse .feat-text{order:1}.feature-split.reverse .feat-visual{order:2}
+  .who-cards,.founding-benefits{grid-template-columns:1fr}.included-visual{grid-template-columns:1fr}
+  .sp-inner{gap:1.5rem}.sp-div{display:none}.nav-links{display:none}
+  .footer-inner{grid-template-columns:1fr}.blob,.dots{display:none}
+}
+@media(max-width:600px){
+  .btn{width:100%;text-align:center}
+}
+
+/* SCREENSHOT FRAMES */
+.shot{position:relative;z-index:1;border-radius:16px;overflow:hidden;box-shadow:0 18px 50px rgba(53,92,170,.14);border:1px solid rgba(0,0,0,.06);background:var(--white);line-height:0}
+.shot img{display:block;width:100%;height:auto}
+.shot-fade::after{content:'';position:absolute;left:0;right:0;bottom:0;height:80px;background:linear-gradient(to bottom,rgba(255,255,255,0),var(--white));pointer-events:none;z-index:2}
+.phone-overlay{position:absolute;z-index:3;right:-14px;bottom:-26px;width:33%;max-width:180px;border-radius:26px;overflow:hidden;box-shadow:0 22px 48px rgba(0,0,0,.22);line-height:0;border:1px solid rgba(0,0,0,.05)}
+.phone-overlay img{display:block;width:100%;height:auto}
+.chart-frame{background:var(--white);border-radius:18px;padding:1.4rem 1.4rem 1rem;box-shadow:0 18px 50px rgba(53,92,170,.12);border:1px solid rgba(0,0,0,.06)}
+.chart-frame img{display:block;width:100%;height:auto;border-radius:6px}
+@media(max-width:900px){
+  .phone-overlay{position:relative;right:auto;bottom:auto;margin:1rem auto 0;width:56%;max-width:220px}
+}
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(20,32,46,.55);backdrop-filter:blur(4px);z-index:1000;display:none;align-items:center;justify-content:center;padding:1.5rem}
+.modal-overlay.open{display:flex}
+.modal{background:var(--white);border-radius:18px;max-width:480px;width:100%;padding:2rem;position:relative;box-shadow:0 30px 80px rgba(0,0,0,.3);max-height:92vh;overflow:auto}
+.modal-close{position:absolute;top:1rem;right:1rem;width:32px;height:32px;border:none;background:var(--base);border-radius:8px;font-size:1.2rem;color:var(--text-light);cursor:pointer;line-height:1}
+.modal-close:hover{background:var(--primary-light)}
+.modal h3{font-size:1.4rem;font-weight:800;color:var(--primary);margin-bottom:.3rem}
+.modal .modal-sub{font-size:.85rem;color:var(--text-light);margin-bottom:.6rem;line-height:1.6}
+.modal label{display:block;font-size:.75rem;font-weight:700;color:var(--text);margin-bottom:.3rem;margin-top:.9rem}
+.modal input,.modal textarea{width:100%;padding:.7rem .8rem;border:1.5px solid var(--primary-light);border-radius:8px;font-family:var(--font-primary);font-size:.9rem;color:var(--text);background:var(--white)}
+.modal input:focus,.modal textarea:focus{outline:none;border-color:var(--secondary)}
+.modal textarea{min-height:88px;resize:vertical}
+.modal .req{color:var(--accent-text)}
+.modal-submit{width:100%;margin-top:1.4rem;padding:.9rem;background:var(--accent);color:#fff;border:none;border-radius:8px;font-weight:700;font-size:.95rem;cursor:pointer;font-family:var(--font-primary)}
+.modal-submit:hover{background:var(--accent-dark)}
+.modal-success{text-align:center;padding:.5rem 0}
+.modal-success .ok{width:56px;height:56px;border-radius:50%;background:var(--secondary-ultra-light);color:var(--secondary-text);display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-size:1.7rem}
+.field-err{border-color:var(--accent)!important}
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav"><div class="nav-inner"><a href="#" class="nav-logo"><svg id="nav-logo" data-name="stacked color" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1824.18 309.41"> <defs> <style> .nl1 { fill: #f49a4d; } .nl2 { fill: #233a67; } </style> </defs> <path class="nl1" d="M195.02,103.21c16.82,5.24,30.08,16.87,33.3,34.8,3.41,19.02-2,39.49-19.78,50.42,6.14,2.73,11.56,5.51,16.37,9.84,14.91,13.43,17.31,35.6,13.2,54.26-3.33,15.09-13.19,27.09-27.02,33.86-8.89,4.39-18.15,6.06-28.22,6.93l-83.52.07-.05-83.05c-30.24-1.37-56.71-18.23-70.63-44.78-5.18-9.49-8.28-19.54-10.27-30.31-4.84-31.09-.64-64.26,19.74-89.25,22.79-27.96,58.64-35.8,92.8-27.78,26.97,6.72,48.39,26.38,57.42,52.91l-32.64,12.06c-3.56-8.88-8.2-16.77-15.53-22.93-9.62-8.13-21.63-11.8-34.3-11.52-26.53-.21-45.82,16.04-51.8,41.63-5.39,23.06-3.12,55.33,14.96,72.86,8.28,7.89,18.75,12.59,30.27,13.59v-77.33s69.94.03,69.94.03c9.01,0,17.33,1.15,25.76,3.7ZM193.16,154.07c.51-9.15-4.82-16.69-13.19-19.48-3.32-1.26-6.69-1.45-10.3-1.96l-34.33.06v44.57s37.88-.13,37.88-.13c12.13-1.27,20.5-10.67,19.95-23.06ZM202.83,226.89c-1.9-7.71-7.68-13.41-15.2-15.77-4.51-1.34-8.98-1.69-13.78-1.71l-38.53.06.03,50.78,40.31-.09c5.81-.33,11.2-.98,16.36-3.56,11.14-5.36,13.52-18.72,10.81-29.71Z"/> <g> <g> <path class="nl2" d="M499.3,149.37c0-37.77,27.47-65.05,64.38-65.05,19.57,0,36.39,7.41,47.55,21.14l-14.42,14.28c-8.76-9.94-19.57-14.82-32.1-14.82-24.89,0-42.92,18.43-42.92,44.45s18.03,44.45,42.92,44.45c12.53,0,23.35-4.88,32.1-15l14.42,14.46c-11.16,13.73-27.98,21.14-47.73,21.14-36.74,0-64.21-27.29-64.21-65.05Z"/> <path class="nl2" d="M722.82,192.92v19.7h-90.13v-126.49h87.73v19.7h-65.41v32.89h58.03v19.33h-58.03v34.88h67.81Z"/> <path class="nl2" d="M854.49,86.13v126.49h-18.37l-66.27-85.65v85.65h-22.15v-126.49h18.37l66.27,85.65v-85.65h22.15Z"/> <path class="nl2" d="M911.14,106h-39.83v-19.88h101.98v19.88h-39.83v106.61h-22.32v-106.61Z"/> <path class="nl2" d="M1080.24,192.92v19.7h-90.13v-126.49h87.73v19.7h-65.41v32.89h58.03v19.33h-58.03v34.88h67.81Z"/> <path class="nl2" d="M1183.76,212.62l-24.55-37.04c-1.55.18-3.09.18-4.64.18h-27.12v36.86h-22.32v-126.49h49.44c31.59,0,51.16,16.99,51.16,44.99,0,19.15-9.27,33.25-25.58,39.94l27.64,41.56h-24.04ZM1153.54,106h-26.09v50.42h26.09c19.57,0,29.7-9.4,29.7-25.3s-10.13-25.12-29.7-25.12Z"/> <path class="nl2" d="M1384.78,178.28c0,21.68-16.14,34.33-47.04,34.33h-59.74v-126.49h56.31c28.84,0,44.29,12.83,44.29,32.89,0,13.01-6.18,22.59-15.45,27.83,12.88,4.34,21.63,15,21.63,31.44ZM1300.32,104.56v34.88h31.59c15.45,0,24.21-5.78,24.21-17.35s-8.76-17.53-24.21-17.53h-31.59ZM1362.29,175.93c0-12.65-9.1-18.25-25.92-18.25h-36.05v36.5h36.05c16.82,0,25.92-5.6,25.92-18.25Z"/> <path class="nl2" d="M1400.06,149.37c0-37.41,27.47-65.05,64.72-65.05s64.72,27.47,64.72,65.05-27.47,65.05-64.72,65.05-64.72-27.65-64.72-65.05ZM1507.01,149.37c0-25.84-18.03-44.45-42.23-44.45s-42.23,18.61-42.23,44.45,18.03,44.45,42.23,44.45,42.23-18.61,42.23-44.45Z"/> <path class="nl2" d="M1544.6,149.37c0-37.41,27.47-65.05,64.72-65.05s64.72,27.47,64.72,65.05-27.47,65.05-64.72,65.05-64.72-27.65-64.72-65.05ZM1651.56,149.37c0-25.84-18.03-44.45-42.23-44.45s-42.23,18.61-42.23,44.45,18.03,44.45,42.23,44.45,42.23-18.61,42.23-44.45Z"/> <path class="nl2" d="M1739.11,159.67l-19.06,20.6v32.35h-22.32v-126.49h22.32v64.87l59.4-64.87h25.06l-50.47,56.56,53.56,69.93h-26.09l-42.4-52.95Z"/> </g> <g> <g> <path class="nl2" d="M316.02,223.22c-1.91,0-2.86-1.5-2.86-4.51,0-4.41,2.48-12.13,7.45-23.17,4.97-11.03,12.36-25.47,22.19-43.33-3.81,0-7.4.48-10.76,1.43-3.36.95-5.14,2.13-5.34,3.54-.1.4-.33.78-.68,1.13s-.88.53-1.58.53c-1.61,0-2.41-.8-2.41-2.41,0-2.61,2.05-4.76,6.17-6.47,4.11-1.7,9.88-2.56,17.3-2.56l10.38-17.15c.7-1.1,1.45-2.33,2.26-3.69.8-1.35,1.7-2.83,2.71-4.44,1-1.4,2.16-2.11,3.46-2.11.8,0,1.4.23,1.81.68.4.45.6.93.6,1.43,0,1.5-2.21,5.52-6.62,12.03-5.52,8.12-8.48,12.54-8.87,13.24,1.5,0,3.76.13,6.77.38,3.01.25,6.57.63,10.68,1.13,1.5.1,2.26.85,2.26,2.26,0,1.61-.9,2.41-2.71,2.41-.7,0-2.11-.12-4.21-.38-2.11-.25-4.36-.48-6.77-.68-2.41-.2-4.46-.25-6.17-.15l-2.26.15c-20.36,35.8-30.49,58.07-30.39,66.79l.15,1.2v.3c0,1.6-.85,2.41-2.56,2.41Z"/> <path class="nl2" d="M316.02,223.85c-1.59,0-3.48-.89-3.48-5.14,0-4.54,2.45-12.2,7.5-23.42,4.87-10.82,12.17-25.09,21.7-42.43-3.35.08-6.54.55-9.52,1.39-3.84,1.09-4.78,2.25-4.89,3.02-.14.57-.42,1.05-.85,1.48-.47.47-1.15.71-2.02.71-1.96,0-3.03-1.08-3.03-3.03,0-2.87,2.21-5.24,6.55-7.05,4.1-1.7,9.88-2.58,17.19-2.6l10.2-16.85c.71-1.11,1.45-2.33,2.25-3.68.8-1.36,1.71-2.84,2.71-4.45,1.14-1.6,2.48-2.4,3.99-2.4.98,0,1.75.3,2.27.89.5.57.76,1.19.76,1.85,0,1.05-.7,3.48-6.73,12.38-4.34,6.39-7.11,10.5-8.27,12.28,1.43.04,3.31.16,5.7.36,3.01.25,6.61.63,10.7,1.13,1.8.12,2.81,1.14,2.81,2.88,0,1.96-1.18,3.03-3.33,3.03-.73,0-2.18-.13-4.29-.38-2.11-.25-4.38-.48-6.75-.68-2.36-.2-4.4-.25-6.08-.15l-1.92.13c-20.1,35.37-30.24,57.63-30.14,66.18l.15,1.51c0,1.96-1.13,3.03-3.18,3.03ZM342.8,151.59h1.06l-.51.93c-9.77,17.74-17.22,32.3-22.17,43.28-4.91,10.9-7.39,18.61-7.39,22.91,0,3.89,1.62,3.89,2.23,3.89,1.35,0,1.93-.53,1.93-1.78v-.3l-.15-1.13c-.11-8.99,9.86-30.94,30.46-67.18l.17-.29,2.59-.17c1.74-.1,3.84-.05,6.26.15,2.38.2,4.67.43,6.79.68,2.06.25,3.45.37,4.14.37,1.84,0,2.08-.9,2.08-1.78,0-1.07-.5-1.55-1.67-1.63-4.11-.5-7.7-.88-10.69-1.13-2.99-.25-5.25-.37-6.72-.37h-1.08l.53-.93c.41-.72,3.32-5.07,8.9-13.28,5.38-7.95,6.51-10.74,6.51-11.68,0-.35-.15-.68-.44-1.02-.28-.31-.72-.47-1.34-.47-1.1,0-2.07.6-2.95,1.85-.98,1.57-1.88,3.04-2.68,4.39-.81,1.36-1.56,2.6-2.27,3.7l-10.55,17.44h-.35c-7.3,0-13.04.84-17.06,2.51-3.84,1.59-5.78,3.57-5.78,5.89,0,1.27.52,1.78,1.78,1.78.53,0,.91-.12,1.14-.34.27-.27.44-.55.51-.84.23-1.62,2.12-2.95,5.78-3.98,3.4-.96,7.08-1.45,10.93-1.45Z"/> </g> <g> <path class="nl2" d="M348.51,215.55c-1.61,0-2.41-.8-2.41-2.41,0-2.11.75-5.44,2.26-10,1.51-4.56,3.48-9.83,5.94-15.8,2.46-5.97,5.09-12.11,7.9-18.43,1.6-3.51,3.26-6.94,4.97-10.3,1.7-3.36,3.31-6.29,4.81-8.8,14.84-25.07,24.07-37.61,27.68-37.61,1.4,0,2.11.7,2.11,2.11,0,.9-.68,2.58-2.03,5.04-1.35,2.46-3.11,5.32-5.26,8.57-2.16,3.26-4.46,6.54-6.92,9.85-2.46,3.31-4.76,6.34-6.92,9.1-2.16,2.76-3.89,4.84-5.19,6.24-1.1,1.3-2.33,3.21-3.69,5.72-1.35,2.51-2.68,5.09-3.99,7.75-1.3,2.66-2.36,4.99-3.16,7l-5.72,14.14c1.5-2,3.46-4.26,5.87-6.77,5.72-6.32,11.66-11.11,17.83-14.37,6.17-3.26,11.36-4.89,15.57-4.89,2.31,0,4.16.7,5.57,2.11,1.4,1.41,2.11,3.11,2.11,5.11,0,3.91-2.56,10.48-7.67,19.71-5.11,9.13-7.67,14.74-7.67,16.85,0,1.1.6,1.65,1.81,1.65,2.81,0,5.87-1.03,9.18-3.08,3.31-2.05,6.72-4.69,10.23-7.9,3.51-3.21,6.92-6.42,10.23-9.63.4-.4,1-.6,1.81-.6,1.5,0,2.26.6,2.26,1.81,0,1.1-.7,2.36-2.11,3.76-6.72,6.72-12.49,11.73-17.3,15.04-4.81,3.31-9.88,4.96-15.19,4.96-4.01,0-6.02-1.85-6.02-5.57,0-1.4.25-2.76.75-4.06.5-1.3,1.3-3.06,2.41-5.26l6.92-13.69c1.7-3.41,2.96-6.27,3.76-8.57.8-2.31,1.2-4.06,1.2-5.27,0-1.7-1.05-2.56-3.16-2.56-3.71,0-8.05,1.48-13.01,4.44-4.96,2.96-10.26,7.4-15.87,13.31-3.21,3.41-6.09,7.02-8.65,10.83-2.56,3.81-4.59,7.92-6.09,12.34l-1.81,5.26c-.7,1.9-1.81,2.86-3.31,2.86Z"/> <path class="nl2" d="M348.51,216.17c-1.96,0-3.03-1.08-3.03-3.03,0-2.19.75-5.53,2.29-10.2,1.52-4.6,3.52-9.93,5.96-15.84,2.45-5.94,5.11-12.15,7.9-18.44,1.59-3.48,3.26-6.95,4.98-10.33,1.7-3.35,3.33-6.32,4.84-8.84,20.12-33.98,25.74-37.91,28.22-37.91,1.76,0,2.73.97,2.73,2.73,0,1.04-.67,2.73-2.11,5.34-1.35,2.45-3.13,5.35-5.29,8.62-2.14,3.23-4.47,6.56-6.94,9.88-2.46,3.31-4.79,6.37-6.93,9.11-2.15,2.75-3.91,4.87-5.22,6.28-1.05,1.24-2.26,3.13-3.59,5.59-1.36,2.52-2.7,5.12-3.97,7.73-1.29,2.63-2.35,4.97-3.14,6.95l-4.16,10.29c.98-1.13,2.08-2.33,3.28-3.58,5.73-6.33,11.78-11.21,17.99-14.49,6.23-3.29,11.57-4.96,15.86-4.96,2.46,0,4.49.77,6.01,2.29,1.52,1.52,2.29,3.39,2.29,5.56,0,4.06-2.54,10.6-7.75,20.01-6.28,11.2-7.59,15.18-7.59,16.55,0,.64.2,1.03,1.18,1.03,2.68,0,5.65-1.01,8.85-2.99,3.26-2.02,6.67-4.65,10.14-7.83,3.51-3.21,6.95-6.45,10.22-9.62.51-.51,1.27-.78,2.24-.78,2.51,0,2.88,1.52,2.88,2.43,0,1.29-.75,2.66-2.29,4.2-6.71,6.71-12.56,11.8-17.39,15.12-4.9,3.37-10.13,5.07-15.55,5.07-4.34,0-6.64-2.14-6.64-6.19,0-1.48.27-2.92.79-4.29.51-1.32,1.33-3.11,2.43-5.32l6.92-13.69c1.68-3.37,2.94-6.23,3.73-8.5.77-2.23,1.17-3.94,1.17-5.06,0-.9-.29-1.93-2.54-1.93-3.58,0-7.85,1.46-12.69,4.35-4.89,2.92-10.19,7.36-15.74,13.21-3.16,3.36-6.05,6.98-8.58,10.75-2.51,3.75-4.54,7.85-6.02,12.19l-1.81,5.27c-.8,2.18-2.12,3.28-3.9,3.28ZM399.66,112.83c-2.31,0-8.89,6.47-27.14,37.3-1.5,2.49-3.11,5.44-4.79,8.77-1.71,3.37-3.38,6.83-4.95,10.28-2.79,6.28-5.45,12.47-7.89,18.41-2.42,5.88-4.42,11.18-5.93,15.75-1.48,4.48-2.23,7.78-2.23,9.81,0,1.27.52,1.78,1.78,1.78s2.12-.8,2.72-2.45l1.8-5.25c1.52-4.44,3.59-8.64,6.17-12.48,2.57-3.83,5.5-7.5,8.71-10.91,5.63-5.93,11.01-10.44,16-13.42,5.04-3,9.53-4.53,13.33-4.53,3.29,0,3.79,1.99,3.79,3.18,0,1.28-.41,3.07-1.24,5.47-.81,2.32-2.08,5.23-3.79,8.65l-6.92,13.69c-1.09,2.17-1.89,3.92-2.38,5.21-.47,1.22-.71,2.51-.71,3.84,0,3.37,1.71,4.94,5.39,4.94,5.16,0,10.15-1.63,14.84-4.85,4.76-3.28,10.55-8.31,17.21-14.97,1.28-1.28,1.92-2.39,1.92-3.32,0-.61-.2-1.18-1.63-1.18-.63,0-1.08.14-1.36.42-3.28,3.19-6.73,6.43-10.25,9.65-3.53,3.23-7,5.91-10.32,7.97-3.39,2.11-6.59,3.18-9.51,3.18-1.54,0-2.43-.83-2.43-2.28,0-2.24,2.54-7.85,7.75-17.15,5.04-9.08,7.59-15.61,7.59-19.4,0-1.85-.63-3.38-1.92-4.67-1.3-1.29-2.97-1.92-5.12-1.92-4.09,0-9.23,1.62-15.28,4.82-6.08,3.21-12.01,8-17.65,14.23-2.39,2.49-4.35,4.75-5.83,6.72l-2.87,3.83,7.51-18.58c.8-2.01,1.88-4.38,3.18-7.04,1.28-2.62,2.63-5.23,4-7.77,1.37-2.54,2.63-4.5,3.76-5.82,1.31-1.41,3.04-3.5,5.17-6.22,2.14-2.73,4.46-5.79,6.91-9.09,2.45-3.31,4.78-6.61,6.9-9.83,2.14-3.24,3.91-6.11,5.24-8.53,1.62-2.93,1.95-4.19,1.95-4.74,0-1.05-.43-1.48-1.48-1.48Z"/> </g> <g> <path class="nl2" d="M432,215.55c-4.21,0-7.52-1.45-9.93-4.36s-3.61-6.47-3.61-10.68c0-7.22,2.41-14.64,7.22-22.26,1.3-2.11,2.81-4.19,4.51-6.24,1.7-2.05,3.56-4.04,5.57-5.94,3.01-2.91,6.17-5.31,9.48-7.22,3.31-1.9,6.52-2.86,9.63-2.86,5.11,0,7.67,2.41,7.67,7.22,0,6.02-3.51,11.49-10.53,16.4-6.52,4.41-12.94,6.62-19.26,6.62-1.1,0-2.08-.07-2.93-.23-.85-.15-1.63-.32-2.33-.53-1,1.91-1.91,4.36-2.71,7.37-.8,3.01-1.2,5.62-1.2,7.82,0,6.62,2.91,9.93,8.72,9.93,4.71,0,9.18-.83,13.39-2.48,4.21-1.65,9.23-4.79,15.04-9.4,3.61-2.81,6.32-5.06,8.12-6.77,1.81-1.7,3.76-3.51,5.87-5.42.6-.4,1.15-.6,1.65-.6s1,.15,1.5.45c.5.3.75.75.75,1.35,0,1.1-1,2.66-3.01,4.66-1.71,1.61-3.51,3.29-5.42,5.04-1.91,1.76-4.91,4.19-9.03,7.3-4.41,3.41-9.23,6.07-14.44,7.97-5.22,1.9-10.13,2.86-14.74,2.86ZM431.85,181.4c3.21,0,6.27-.5,9.18-1.5,2.91-1,5.66-2.46,8.27-4.36,5.81-4.31,8.72-8.37,8.72-12.19,0-1.7-1.05-2.56-3.16-2.56-4.01,0-8.68,2.46-13.99,7.37-2.61,2.41-4.74,4.59-6.39,6.54s-3.19,4.09-4.59,6.39c.6.2,1.25.3,1.96.3Z"/> <path class="nl2" d="M432,216.17c-4.39,0-7.89-1.54-10.41-4.59-2.49-3.01-3.75-6.74-3.75-11.08,0-7.31,2.46-14.91,7.32-22.6,1.31-2.12,2.84-4.24,4.56-6.31,1.72-2.07,3.61-4.09,5.62-6,3.03-2.92,6.25-5.38,9.6-7.31,3.39-1.95,6.74-2.94,9.94-2.94,5.43,0,8.3,2.71,8.3,7.85,0,6.21-3.63,11.89-10.8,16.91-6.6,4.47-13.2,6.73-19.61,6.73-1.14,0-2.16-.08-3.04-.24-.68-.12-1.32-.26-1.9-.41-.89,1.79-1.7,4.08-2.43,6.8-.78,2.94-1.18,5.51-1.18,7.66,0,6.26,2.65,9.3,8.1,9.3,4.61,0,9.04-.82,13.16-2.44,4.13-1.62,9.14-4.75,14.88-9.31,3.59-2.79,6.31-5.06,8.08-6.73,1.82-1.72,3.8-3.55,5.88-5.43,1.55-1.05,2.68-.95,3.9-.22.69.42,1.06,1.07,1.06,1.89,0,1.29-1.04,2.96-3.19,5.11-1.72,1.62-3.53,3.3-5.43,5.06-1.91,1.76-4.96,4.23-9.07,7.33-4.44,3.43-9.36,6.14-14.6,8.06-5.26,1.92-10.3,2.9-14.96,2.9ZM454.87,156.6c-2.98,0-6.12.93-9.32,2.78-3.25,1.87-6.4,4.27-9.35,7.13-1.98,1.88-3.83,3.86-5.52,5.89-1.68,2.02-3.18,4.1-4.46,6.17-4.73,7.49-7.13,14.87-7.13,21.93,0,4.04,1.17,7.5,3.47,10.28,2.3,2.78,5.39,4.13,9.45,4.13,4.51,0,9.4-.95,14.53-2.82,5.13-1.87,9.93-4.52,14.27-7.88,4.08-3.09,7.1-5.53,8.99-7.26,1.9-1.75,3.71-3.43,5.41-5.04,2.32-2.32,2.81-3.57,2.81-4.21,0-.38-.13-.63-.45-.82-.8-.48-1.48-.54-2.49.13-2,1.82-3.97,3.63-5.78,5.35-1.8,1.71-4.55,4-8.17,6.81-5.83,4.63-10.95,7.82-15.2,9.49-4.26,1.68-8.85,2.53-13.62,2.53-6.2,0-9.35-3.55-9.35-10.55,0-2.26.41-4.94,1.22-7.98.81-3.04,1.74-5.57,2.76-7.5l.24-.45.49.14c.66.19,1.42.36,2.27.51.81.14,1.76.22,2.83.22,6.16,0,12.52-2.19,18.91-6.51,6.8-4.76,10.25-10.11,10.25-15.88,0-4.44-2.3-6.6-7.05-6.6ZM431.85,182.03c-.77,0-1.5-.11-2.16-.33l-.74-.25.41-.67c1.41-2.32,2.98-4.5,4.65-6.47,1.67-1.97,3.84-4.19,6.45-6.6,5.41-5,10.26-7.54,14.41-7.54,3.29,0,3.78,1.99,3.78,3.18,0,4-3.02,8.27-8.98,12.69-2.66,1.94-5.5,3.44-8.44,4.45-2.96,1.02-6.12,1.54-9.38,1.54ZM430.88,180.7c.31.05.63.08.97.08,3.12,0,6.14-.5,8.97-1.47,2.83-.97,5.56-2.41,8.11-4.28,5.62-4.17,8.47-8.1,8.47-11.68,0-.9-.29-1.93-2.53-1.93-3.83,0-8.39,2.42-13.57,7.21-2.57,2.37-4.7,4.55-6.34,6.49-1.45,1.72-2.82,3.59-4.08,5.59Z"/> </g> </g> </g> </svg></a><ul class="nav-links"><li><a href="#" class="nav-cta" data-cta="Book a Demo">Book a Demo</a></li></ul></div></nav>
+
+<!-- ==================== HERO ==================== -->
+<section class="section" style="padding-top:calc(var(--gap)+80px);background:linear-gradient(170deg,var(--white) 0%,var(--secondary-ultra-light) 35%,var(--primary-ultra-light) 65%,var(--secondary-ultra-light) 100%)">
+  <div class="blob" style="width:500px;height:500px;top:-100px;right:-100px;background:radial-gradient(circle,rgba(0,171,189,.07),transparent 60%)"></div>
+  <div class="blob" style="width:400px;height:400px;bottom:-80px;left:-80px;background:radial-gradient(circle,rgba(224,113,44,.05),transparent 60%)"></div>
+  <div class="section-inner">
+    <div class="feature-split">
+      <div class="feat-text">
+        <span style="display:inline-flex;align-items:center;gap:.5rem;background:var(--accent);color:#fff;padding:.45rem 1rem;border-radius:20px;font-size:.72rem;font-weight:700;margin-bottom:1.2rem"><span style="width:6px;height:6px;background:#fff;border-radius:50%;animation:pd 2s ease infinite"></span> Founding Centers Now Open</span>
+        <span class="script script-hero" style="color:var(--accent)">Get Back to What Matters</span>
+        <h1 class="headline" style="font-size:clamp(2rem,4vw,3rem)">You opened your center <span style="color:var(--secondary-text)">to change kids' lives.</span><br>Not to drown in busy work.</h1>
+        <p class="subhead">Paper sign-in sheets, texting parents from your personal phone, student data scattered across five different apps, no real-time view of your classroom. It all pulled you away from the reason you started. The Center Book handles center operations so your staff gets back to what matters most: the students.</p>
+        <div style="display:flex;gap:1rem;flex-wrap:wrap"><a href="#" class="btn btn-founding" data-cta="Become a Founding Center">Become a Founding Center</a><a href="#" class="btn btn-demo" data-cta="Book a Demo">Book a Demo</a></div>
+      </div>
+      <div class="feat-visual">
+        <div class="blob" style="background:linear-gradient(135deg,rgba(53,92,170,.06),rgba(0,171,189,.06));width:120%;height:120%;top:-10%;left:-10%"></div>
+        <div class="shot"><img src="/images/img-01.png" alt="The Center Book attendance board"></div>
+        <div class="float-el" style="bottom:24px;left:-20px;border-left:3px solid var(--secondary-text)"><i data-lucide="send" style="width:16px;height:16px;color:var(--secondary-text)"></i> <span><strong style="color:var(--primary)">Text sent to parent</strong><br>"Ariella is ready for pickup."</span></div>
+      </div>
+    </div>
+  </div>
+  <style>@keyframes pd{0%,100%{opacity:1}50%{opacity:.5}}</style>
+</section>
+
+<!-- SOCIAL PROOF -->
+<section class="social-proof"><div class="sp-inner"><div class="sp-stat"><div class="sp-num">334+</div><div class="sp-label">Students managed daily</div></div><div class="sp-div"></div><div class="sp-stat"><div class="sp-num">200+</div><div class="sp-label">Parent accounts</div></div><div class="sp-div"></div><div class="sp-stat"><div class="sp-num">15</div><div class="sp-label">Staff on platform</div></div><div class="sp-div"></div><div class="sp-quote">"I spent thousands on systems that promised multi-child support. Every single one required a unique email per child. That's not how families work."<cite>Bincy S., Center Owner</cite></div></div></section>
+
+<!-- ==================== FEATURE 1: DAILY OPS ==================== -->
+<section class="section bg-white" id="product">
+  <div class="dots" style="width:140px;height:140px;top:40px;right:30px"></div>
+  <div class="section-inner">
+    <span class="eyebrow" style="color:var(--secondary-text)">Daily Operations</span>
+    <div class="feature-split">
+      <div class="feat-text">
+        <span class="script script-xl" style="color:var(--primary)">Your Center's Command Center</span>
+        <h2 class="headline">Run your entire center from one screen.</h2>
+        <p class="subhead">Staff-operated check-in. Live classroom visibility across every tablet. Automated parent SMS. Attendance tracking. A lobby display for parents. All synced in real time.</p>
+        <div class="feat-points">
+          <div class="feat-point"><div class="feat-point-icon teal"><i data-lucide="clipboard-list" style="width:22px;height:22px;color:var(--secondary-text)"></i></div><span><strong style="color:var(--text)">Staff-operated check-in</strong><br>Barcode scan, medical alerts, pickup contacts, name-search fallback, and undo</span></div>
+          <div class="feat-point"><div class="feat-point-icon blue"><i data-lucide="layout-dashboard" style="width:22px;height:22px;color:var(--primary)"></i></div><span><strong style="color:var(--text)">Live classroom management</strong><br>Row assignments, session timers, testing seats, and per-student prep checklists</span></div>
+          <div class="feat-point"><div class="feat-point-icon orange"><i data-lucide="send" style="width:22px;height:22px;color:var(--accent-text)"></i></div><span><strong style="color:var(--text)">Automated pickup SMS</strong><br>5-min reminders, Parent Touchpoint alerts, and bathroom-request routing</span></div>
+          <div class="feat-point"><div class="feat-point-icon tertiary"><i data-lucide="bell" style="width:22px;height:22px;color:var(--tertiary)"></i></div><span><strong style="color:var(--text)">Attendance kanban</strong><br>Six status columns, no-show flagging, holiday overlays, weekly reconciliation</span></div>
+        </div>
+        <div><a href="#" class="btn btn-founding" data-cta="See It Live">See It Live</a></div>
+      </div>
+      <div class="feat-visual">
+        <div class="blob" style="background:radial-gradient(circle,rgba(0,171,189,.18),transparent 68%);width:122%;height:122%;top:-11%;left:-11%"></div>
+        <div class="shot"><img src="/images/img-02.png" alt="Live classroom view"></div>
+        <div class="float-el" style="top:30px;right:-15px"><i data-lucide="refresh-cw" style="width:14px;height:14px;color:var(--secondary-text)"></i> Syncs every 5 seconds</div>
+        <div class="float-el" style="bottom:50px;left:-20px"><i data-lucide="smartphone" style="width:14px;height:14px;color:var(--primary)"></i> Installable tablet app (PWA)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIAL BREAK 1 -->
+<section class="testi-break bg-cool">
+  <div class="dots" style="width:100px;height:60px;top:20px;left:40px"></div>
+  <div class="testi-card"><span class="testi-mark">&#8220;</span>
+    <blockquote>"The automated pickup SMS changed how our center runs overnight. Parents no longer have to guess when their child is ready. <strong>That one feature sold me on the entire platform.</strong>"</blockquote>
+    <div class="testi-person"><div class="testi-avatar">BS</div><div class="testi-meta"><span class="testi-name">Bincy S.</span><span class="testi-role">Founding Center #1</span></div></div>
+  </div>
+</section>
+
+<!-- ==================== FEATURE 2: PARENT COMMS ==================== -->
+<section class="section bg-warm">
+  <div class="dots" style="width:100px;height:120px;bottom:30px;right:40px"></div>
+  <div class="section-inner">
+    <span class="eyebrow" style="color:var(--accent-text)">Parent Communication</span>
+    <div class="feature-split reverse">
+      <div class="feat-text">
+        <span class="script script-xl" style="color:var(--accent-text)">Stay Connected Without the Chaos</span>
+        <h2 class="headline">Parents stay informed. Staff stay focused.</h2>
+        <p class="subhead">Automated texts, two-way messaging, consent tracking, milestone celebrations, and progress meeting workflows. Every message logged and connected to the right student.</p>
+        <div class="feat-points">
+          <div class="feat-point"><div class="feat-point-icon orange"><i data-lucide="send" style="width:22px;height:22px;color:var(--accent-text)"></i></div><span><strong style="color:var(--text)">Automated pickup + 5-min reminders</strong><br>Parent Touchpoint and bathroom-request alerts</span></div>
+          <div class="feat-point"><div class="feat-point-icon teal"><i data-lucide="mail" style="width:22px;height:22px;color:var(--secondary-text)"></i></div><span><strong style="color:var(--text)">Two-way SMS inbox</strong><br>Per-contact threads, manual send, no personal phones</span></div>
+          <div class="feat-point"><div class="feat-point-icon blue"><i data-lucide="check" style="width:22px;height:22px;color:var(--primary)"></i></div><span><strong style="color:var(--text)">SMS consent tracking</strong><br>Immutable history log and automatic STOP handling</span></div>
+          <div class="feat-point"><div class="feat-point-icon tertiary"><i data-lucide="mail" style="width:22px;height:22px;color:var(--tertiary)"></i></div><span><strong style="color:var(--text)">Level-up emails + progress meetings</strong><br>Automated celebrations, cadence tracking, milestone workflows</span></div>
+        </div>
+        <div><a href="#" class="btn btn-founding" data-cta="Learn More">Learn More</a></div>
+      </div>
+      <div class="feat-visual">
+        <div class="blob" style="background:radial-gradient(circle,rgba(224,113,44,.15),transparent 68%);width:122%;height:122%;top:-11%;left:-11%"></div>
+        <div class="shot"><img src="/images/img-03.png" alt="Two-way SMS inbox"></div><div class="phone-overlay"><img src="/images/img-04.png" alt="Automated pickup text a parent receives"></div>
+        <div class="float-el" style="top:20px;left:-20px;border-left:3px solid var(--accent)"><i data-lucide="bell" style="width:14px;height:14px;color:var(--accent-text)"></i> Configurable alert routing</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== FEATURE 3: STUDENT MGMT ==================== -->
+<section class="section bg-white">
+  <div class="section-inner">
+    <span class="eyebrow" style="color:var(--secondary-text)">Student Management</span>
+    <div class="feature-split">
+      <div class="feat-text">
+        <span class="script script-xl" style="color:var(--secondary-text)">Every Student. Every Detail.</span>
+        <h2 class="headline">One profile with the full picture.</h2>
+        <p class="subhead">Complete student records with real multi-to-multi family relationships. Notes, journals, goals, attendance history, level progression, and communications on one page.</p>
+        <div class="feat-points">
+          <div class="feat-point"><div class="feat-point-icon teal"><i data-lucide="user" style="width:22px;height:22px;color:var(--secondary-text)"></i></div><span><strong style="color:var(--text)">Full student profiles</strong><br>Enrollment status, medical notes, flags, and audit-tracked permissions</span></div>
+          <div class="feat-point"><div class="feat-point-icon blue"><i data-lucide="users" style="width:22px;height:22px;color:var(--primary)"></i></div><span><strong style="color:var(--text)">Multi-to-multi contacts</strong><br>One parent, multiple children, separate billing and communication</span></div>
+          <div class="feat-point"><div class="feat-point-icon orange"><i data-lucide="square-pen" style="width:22px;height:22px;color:var(--accent-text)"></i></div><span><strong style="color:var(--text)">Journal, goals, and communication history</strong><br>Five entry types, per-student goals, and full message timeline</span></div>
+        </div>
+        <div><a href="#" class="btn btn-founding" data-cta="Book a Demo">Book a Demo</a></div>
+      </div>
+      <div class="feat-visual">
+        <div class="blob" style="background:radial-gradient(circle,rgba(0,171,189,.18),transparent 68%);width:120%;height:120%;top:-10%;left:-7%"></div>
+        <div class="shot shot-fade" style="max-height:520px"><img src="/images/img-05.png" alt="Student profile"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== WHO IS THIS FOR ==================== -->
+<section class="section bg-muted" id="for">
+  <div class="section-inner centered">
+    <span class="script script-xl" style="color:var(--primary)">Who The Center Book Is For</span>
+    <h2 class="headline">If students walk through your door, this was built for you.</h2>
+    <div class="curve"></div>
+    <div class="who-cards">
+      <div class="who-card"><h4>High-Volume Centers</h4><ul><li>100+ enrolled students</li><li>Multiple staff and shifts</li><li>Families with more than one child</li><li>Daily check-in and check-out</li><li>Classroom session management</li></ul></div>
+      <div class="who-card"><h4>Multi-Subject Programs</h4><ul><li>Math, reading, or both</li><li>Level-based curriculum</li><li>Placement testing on intake</li><li>Progress tracking per subject</li><li>Per-student scheduling</li></ul></div>
+      <div class="who-card"><h4>Franchise + Independent</h4><ul><li>Works alongside your franchisor's system</li><li>Independent centers welcome</li><li>After-school and enrichment</li><li>Supplemental education programs</li><li>Any center with in-person instruction</li></ul></div>
+    </div>
+    <a href="#" class="btn btn-demo" data-cta="See If It's a Fit">See If It's a Fit</a>
+  </div>
+</section>
+
+<!-- TESTIMONIAL BREAK 2 -->
+<section class="testi-break bg-white">
+  <div class="dots" style="width:80px;height:80px;bottom:20px;right:60px"></div>
+  <div class="testi-card"><span class="testi-mark">&#8220;</span>
+    <blockquote>"I spent thousands on platforms that promised family support. Every one required a unique email per child. <strong>The Center Book is the first system that actually understands how families work.</strong>"</blockquote>
+    <div class="testi-person"><div class="testi-avatar">BS</div><div class="testi-meta"><span class="testi-name">Bincy S.</span><span class="testi-role">Founding Center #1</span></div></div>
+  </div>
+</section>
+
+<!-- ==================== FEATURE 4: SCHEDULING ==================== -->
+<section class="section bg-blue">
+  <div class="section-inner">
+    <span class="eyebrow" style="color:var(--primary)">Scheduling + Staff</span>
+    <div class="feature-split reverse">
+      <div class="feat-text">
+        <span class="script script-xl" style="color:var(--primary)">Schedules, Shifts, and Time</span>
+        <h2 class="headline">Student schedules, staff shifts, and time tracking. One place.</h2>
+        <p class="subhead">Per-student, per-day schedules with weekly overrides. Staff shift management with conflict detection. Timeclock with CSV export. Booking calendar for progress meetings.</p>
+        <div class="feat-points">
+          <div class="feat-point"><div class="feat-point-icon teal"><i data-lucide="calendar" style="width:22px;height:22px;color:var(--secondary-text)"></i></div><span><strong style="color:var(--text)">Student scheduling</strong><br>Per-day recurring schedules with per-week overrides</span></div>
+          <div class="feat-point"><div class="feat-point-icon blue"><i data-lucide="users" style="width:22px;height:22px;color:var(--primary)"></i></div><span><strong style="color:var(--text)">Staff shifts + coverage grid</strong><br>15-min precision blocks with conflict detection</span></div>
+          <div class="feat-point"><div class="feat-point-icon orange"><i data-lucide="clock" style="width:22px;height:22px;color:var(--accent-text)"></i></div><span><strong style="color:var(--text)">Staff timeclock</strong><br>PIN/barcode entry, overtime split, CSV export for your payroll provider</span></div>
+          <div class="feat-point"><div class="feat-point-icon tertiary"><i data-lucide="calendar" style="width:22px;height:22px;color:var(--tertiary)"></i></div><span><strong style="color:var(--text)">Booking calendar</strong><br>Progress meetings with create, reschedule, and cancel</span></div>
+        </div>
+        <div><a href="#" class="btn btn-founding" data-cta="See It Live">See It Live</a></div>
+      </div>
+      <div class="feat-visual">
+        <div class="blob" style="background:radial-gradient(circle,rgba(53,92,170,.16),transparent 68%);width:124%;height:120%;top:-10%;left:-12%"></div>
+        <div class="shot"><img src="/images/img-06.png" alt="Staff coverage grid"></div>
+        <div class="float-el" style="bottom:30px;right:-15px"><i data-lucide="trending-up" style="width:14px;height:14px;color:var(--secondary-text)"></i> Capacity utilization</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== FEATURE 5: CURRICULUM ==================== -->
+<section class="section bg-cool">
+  <div class="section-inner">
+    <span class="eyebrow" style="color:var(--secondary-text)">Curriculum + Analytics</span>
+    <div class="feature-split">
+      <div class="feat-text">
+        <span class="script script-xl" style="color:var(--secondary-text)">Track Progress. See Results.</span>
+        <h2 class="headline">See exactly where every student stands.</h2>
+        <p class="subhead">A per-student progress view that brings it together: current ASHR tier for Math and Reading, recent test pass-rate trends, and level velocity measured against your center's cohort. Every number reads live from your own records.</p>
+        <div class="feat-points">
+          <div class="feat-point"><div class="feat-point-icon blue"><i data-lucide="trending-up" style="width:22px;height:22px;color:var(--primary)"></i></div><span><strong style="color:var(--text)">ASHR tier position</strong><br>Where each student sits on the medal scale, Below Grade through Platinum, for Math and Reading</span></div>
+          <div class="feat-point"><div class="feat-point-icon orange"><i data-lucide="square-check" style="width:22px;height:22px;color:var(--accent-text)"></i></div><span><strong style="color:var(--text)">Pass rate and level velocity</strong><br>Recent pass-rate trend next to months-per-level pacing, benchmarked to your cohort average</span></div>
+          <div class="feat-point"><div class="feat-point-icon teal"><i data-lucide="trending-up" style="width:22px;height:22px;color:var(--secondary-text)"></i></div><span><strong style="color:var(--text)">Live, from your own data</strong><br>Every chart reads straight from your records in real time. No exports, no spreadsheets.</span></div>
+        </div>
+        <div><a href="#" class="btn btn-founding" data-cta="Book a Demo">Book a Demo</a></div>
+      </div>
+      <div class="feat-visual">
+        <div class="blob" style="background:radial-gradient(circle,rgba(0,171,189,.18),transparent 68%);width:120%;height:124%;top:-12%;left:-10%"></div>
+        <div class="shot"><img src="/images/img-07.png" alt="Insights and analytics"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== PROOF (LIVE DATA) ==================== -->
+<section class="section bg-white">
+  <div class="dots" style="width:120px;height:120px;top:40px;left:30px"></div>
+  <div class="section-inner centered">
+    <span class="eyebrow" style="color:var(--secondary-text)">The Proof</span>
+    <span class="script script-xl" style="color:var(--secondary-text);display:block">See What Time Really Does</span>
+    <h2 class="headline">The longer they stay, the further ahead they get.</h2>
+    <div class="curve"></div>
+    <p class="subhead" style="max-width:640px;margin-left:auto;margin-right:auto">This is real, anonymized data from a live Center Book center. Length of enrollment plotted against above-grade performance. No spreadsheets to decode and no digging through five tools. Just one clear view of how students and the center are doing.</p>
+  </div>
+  <div class="section-inner" style="max-width:900px;margin-top:1rem">
+    <div class="chart-frame"><img src="/images/img-08.png" alt="Above vs below grade by length of study, real center data"></div>
+    <p style="text-align:center;font-size:.72rem;color:var(--neutral);margin-top:.9rem">Real data from a live Center Book center. Individual students are never identified.</p>
+    <div class="centered" style="margin-top:1.8rem"><a href="#" class="btn btn-founding" data-cta="Contact Us">Contact Us</a></div>
+  </div>
+</section>
+
+<!-- ==================== FEATURE 6: PIPELINE ==================== -->
+<section class="section bg-warm">
+  <div class="section-inner">
+    <span class="eyebrow" style="color:var(--accent-text)">Pipeline + Enrollment</span>
+    <div class="feature-split reverse">
+      <div class="feat-text">
+        <span class="script script-xl" style="color:var(--accent-text)">Inquiry to Enrolled. Connected.</span>
+        <h2 class="headline">One pipeline. No spreadsheets.</h2>
+        <p class="subhead">Lead management, public enrollment forms, onboarding automation, and a task inbox. Prospective records convert into real student profiles when families commit.</p>
+        <div class="feat-points">
+          <div class="feat-point"><div class="feat-point-icon teal"><i data-lucide="user-plus" style="width:22px;height:22px;color:var(--secondary-text)"></i></div><span><strong style="color:var(--text)">Lead pipeline kanban</strong><br>Stage counts, stagnation indicators, drag-to-advance</span></div>
+          <div class="feat-point"><div class="feat-point-icon blue"><i data-lucide="clipboard-list" style="width:22px;height:22px;color:var(--primary)"></i></div><span><strong style="color:var(--text)">Public enrollment form</strong><br>Token-linked multi-student intake to your real database</span></div>
+          <div class="feat-point"><div class="feat-point-icon orange"><i data-lucide="refresh-cw" style="width:22px;height:22px;color:var(--accent-text)"></i></div><span><strong style="color:var(--text)">Onboarding automation + task inbox</strong><br>Multi-step dispatch, staff routing, automated task rules</span></div>
+        </div>
+        <div><a href="#" class="btn btn-founding" data-cta="Learn More">Learn More</a></div>
+      </div>
+      <div class="feat-visual">
+        <div class="blob" style="background:radial-gradient(circle,rgba(224,113,44,.15),transparent 68%);width:120%;height:120%;top:-10%;left:-10%"></div>
+        <div class="shot"><img src="/images/img-09.png" alt="Lead pipeline board"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== AUTOMATION ==================== -->
+<section class="section bg-blue">
+  <div class="dots" style="width:100px;height:100px;bottom:30px;right:40px"></div>
+  <div class="section-inner centered">
+    <span class="eyebrow" style="color:var(--primary)">Automation</span>
+    <span class="script script-xl" style="color:var(--primary);display:block">Set It and Forget It</span>
+    <h2 class="headline">The little things happen on their own.</h2>
+    <div class="curve"></div>
+    <p class="subhead" style="max-width:640px;margin-left:auto;margin-right:auto">Birthday cards, level-up celebrations, test-pass certificates, progress-meeting prep. Set the rules once and the platform runs them in the background, so nothing slips and no one has to remember.</p>
+  </div>
+  <div class="section-inner" style="max-width:960px;margin-top:1rem">
+    <div class="shot"><img src="/images/img-10.png" alt="Staff automated tasks settings"></div>
+    <div class="centered" style="margin-top:1.8rem"><a href="#" class="btn btn-founding" data-cta="See It Live">See It Live</a></div>
+  </div>
+</section>
+
+<!-- ==================== EVERYTHING INCLUDED ==================== -->
+<section class="section bg-white">
+  <div class="section-inner centered">
+    <span class="script script-hero" style="color:var(--primary)">Everything. Included.</span>
+    <h2 class="headline">The complete platform. All built. All yours.</h2>
+    <div class="curve"></div>
+    <p class="subhead" style="margin-bottom:3rem">One subscription. One database. One system that handles your entire center. Here's what you get as a Founding Center:</p>
+  </div>
+  <div class="section-inner">
+    <!-- Bold feature callouts - FGF style -->
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-bottom:2.5rem">
+      <div style="background:var(--secondary-ultra-light);border-radius:16px;padding:2rem;text-align:center">
+        <div style="font-size:2.2rem;font-weight:800;color:var(--primary);margin-bottom:.3rem">36+</div>
+        <div style="font-size:.82rem;font-weight:600;color:var(--text)">Built-in Features</div>
+        <div style="font-size:.7rem;color:var(--text-light);margin-top:.3rem">Not integrations. Built into one platform.</div>
+      </div>
+      <div style="background:var(--accent-ultra-light);border-radius:16px;padding:2rem;text-align:center">
+        <div style="font-size:2.2rem;font-weight:800;color:var(--primary);margin-bottom:.3rem">1</div>
+        <div style="font-size:.82rem;font-weight:600;color:var(--text)">Dedicated Database</div>
+        <div style="font-size:.7rem;color:var(--text-light);margin-top:.3rem">Your data. Your center. Complete isolation.</div>
+      </div>
+      <div style="background:var(--primary-ultra-light);border-radius:16px;padding:2rem;text-align:center">
+        <div style="font-size:2.2rem;font-weight:800;color:var(--primary);margin-bottom:.3rem">0</div>
+        <div style="font-size:.82rem;font-weight:600;color:var(--text)">Other Tools Needed</div>
+        <div style="font-size:.7rem;color:var(--text-light);margin-top:.3rem">No duct tape. No third-party apps.</div>
+      </div>
+    </div>
+    <!-- Three column checklist with strong visual hierarchy -->
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;background:var(--base);border-radius:20px;padding:2.5rem">
+      <div>
+        <div style="font-size:.75rem;font-weight:800;color:var(--secondary-text);letter-spacing:2px;text-transform:uppercase;margin-bottom:1rem;padding-bottom:.5rem;border-bottom:2.5px solid var(--secondary-light)">OPERATIONS</div>
+        <div style="display:flex;flex-direction:column;gap:.5rem">
+          <div style="display:flex;align-items:center;gap:.6rem;font-size:.82rem"><i data-lucide="check" style="width:16px;height:16px;color:var(--secondary-text);flex-shrink:0"></i> Staff-operated barcode check-in</div>
+          <div style="display:flex;align-items:center;gap:.6rem;font-size:.82rem"><i data-lucide="check" style="width:16px;height:16px;color:var(--secondary-text);flex-shrink:0"></i> Live classroom + row assignments</div>
+          <div style="display:flex;align-items:center;gap:.6rem;font-size:.82rem"><i data-lucide="check" style="width:16px;height:16px;color:var(--secondary-text);flex-shrink:0"></i> Attendance kanban + reconciliation</div>
+          <div style="display:flex;align-items:center;gap:.6rem;font-size:.82rem"><i data-lucide="check" style="width:16px;height:16px;color:var(--secondary-text);flex-shrink:0"></i> Public lobby board (TV display)</div>
+          <div style="display:flex;align-items:center;gap:.6rem;font-size:.82rem"><i data-lucide="check" style="width:16px;height:16px;color:var(--secondary-text);flex-shrink:0"></i> Installable tablet app (PWA)</div>
+          <div style="display:flex;align-items:center;gap:.6rem;font-size:.82rem"><i data-lucide="check" style="width:16px;height:16px;color:var(--secondary-text);flex-shrink:0"></i> Real-time multi-tablet sync</div>
+          <div style="display:flex;align-items:center;gap:.6rem;font-size:.82rem"><i data-lucide="check" style="width:16px;height:16px;color:var(--secondary-text);flex-shrink:0"></i> Library circulation</div>
+          <div style="display:flex;align-items:center;gap:.6rem;font-size:.82rem"><i data-lucide="check" style="width:16px;height:16px;color:var(--secondary-text);flex-shrink:0"></i> Student learning apps</div>
+        </div>
+        <div style="font-size:.75rem;font-weight:800;color:var(--accent-text);letter-spacing:2px;text-transform:uppercase;margin:1.5rem 0 1rem;padding-bottom:.5rem;border-bottom:2.5px solid var(--accent-light)">COMMUNICATION</div>
+        <div style="display:flex;flex-direction:column;gap:.5rem">
+          <div style="display:flex;align-items:center;gap:.6rem;font-size:.82rem"><i data-lucide="check" style="width:16px;height:16px;color:var(--accent-text);flex-shrink:0"></i> Automated pickup SMS + reminders</div>
+          <div style="display:flex;align-items:center;gap:.6rem;font-size:.82rem"><i data-lucide="check" style="width:16px;height:16px;color:var(--accent-text);flex-shrink:0"></i> Two-way SMS inbox</div>
+          <div style="display:flex;align-items:center;gap:.6rem;font-size:.82rem"><i data-lucide="check" style="width:16px;height:16px;color:var(--accent-text);flex-shrink:0"></i> Level-up celebration emails</div>
+          <div style="display:flex;align-items:center;gap:.6rem;font-size:.82rem"><i data-lucide="check" style="width:16px;height:16px;color:var(--accent-text);flex-shrink:0"></i> Progress meeting workflow</div>
+          <div style="display:flex;align-items:center;gap:.6rem;font-size:.82rem"><i data-lucide="check" style="width:16px;height:16px;color:var(--accent-text);flex-shrink:0"></i> Notifications + alert routing</div>
+          <div style="display:flex;align-items:center;gap:.6rem;font-size:.82rem"><i data-lucide="check" style="width:16px;height:16px;color:var(--accent-text);flex-shrink:0"></i> Parent portal + email campaigns</div>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:.75rem;font-weight:800;color:var(--primary);letter-spacing:2px;text-transform:uppercase;margin-bottom:1rem;padding-bottom:.5rem;border-bottom:2.5px solid var(--primary-light)">STUDENTS + DATA</div>
+        <div style="display:flex;flex-direction:column;gap:.5rem">
+          <div style="display:flex;align-items:center;gap:.6rem;font-size:.82rem"><i data-lucide="check" style="width:16px;height:16px;color:var(--primary);flex-shrink:0"></i> Multi-to-multi contact management</div>
+          <div style="display:flex;align-items:center;gap:.6rem;font-size:.82rem"><i data-lucide="check" style="width:16px;height:16px;color:var(--primary);flex-shrink:0"></i> Student journal + goals</div>
+          <div style="display:flex;align-items:center;gap:.6rem;font-size:.82rem"><i data-lucide="check" style="width:16px;height:16px;color:var(--primary);flex-shrink:0"></i> Curriculum + level tracking</div>
+          <div style="display:flex;align-items:center;gap:.6rem;font-size:.82rem"><i data-lucide="check" style="width:16px;height:16px;color:var(--primary);flex-shrink:0"></i> Placement testing + insights dashboard</div>
+          <div style="display:flex;align-items:center;gap:.6rem;font-size:.82rem"><i data-lucide="check" style="width:16px;height:16px;color:var(--primary);flex-shrink:0"></i> Lead pipeline + enrollment CRM</div>
+          <div style="display:flex;align-items:center;gap:.6rem;font-size:.82rem"><i data-lucide="check" style="width:16px;height:16px;color:var(--primary);flex-shrink:0"></i> Public enrollment forms</div>
+          <div style="display:flex;align-items:center;gap:.6rem;font-size:.82rem"><i data-lucide="check" style="width:16px;height:16px;color:var(--primary);flex-shrink:0"></i> Onboarding automation</div>
+          <div style="display:flex;align-items:center;gap:.6rem;font-size:.82rem"><i data-lucide="check" style="width:16px;height:16px;color:var(--primary);flex-shrink:0"></i> Task management + inbox</div>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:.75rem;font-weight:800;color:var(--tertiary);letter-spacing:2px;text-transform:uppercase;margin-bottom:1rem;padding-bottom:.5rem;border-bottom:2.5px solid var(--tertiary)">PLATFORM + ADMIN</div>
+        <div style="display:flex;flex-direction:column;gap:.5rem">
+          <div style="display:flex;align-items:center;gap:.6rem;font-size:.82rem"><i data-lucide="check" style="width:16px;height:16px;color:var(--tertiary);flex-shrink:0"></i> Center website + funnel</div>
+          <div style="display:flex;align-items:center;gap:.6rem;font-size:.82rem"><i data-lucide="check" style="width:16px;height:16px;color:var(--tertiary);flex-shrink:0"></i> Student + staff scheduling</div>
+          <div style="display:flex;align-items:center;gap:.6rem;font-size:.82rem"><i data-lucide="check" style="width:16px;height:16px;color:var(--tertiary);flex-shrink:0"></i> Staff timeclock + hour export</div>
+          <div style="display:flex;align-items:center;gap:.6rem;font-size:.82rem"><i data-lucide="check" style="width:16px;height:16px;color:var(--tertiary);flex-shrink:0"></i> Booking calendar</div>
+          <div style="display:flex;align-items:center;gap:.6rem;font-size:.82rem"><i data-lucide="check" style="width:16px;height:16px;color:var(--tertiary);flex-shrink:0"></i> Staff "Me" dashboard</div>
+          <div style="display:flex;align-items:center;gap:.6rem;font-size:.82rem"><i data-lucide="check" style="width:16px;height:16px;color:var(--tertiary);flex-shrink:0"></i> Roles + permission matrix</div>
+          <div style="display:flex;align-items:center;gap:.6rem;font-size:.82rem"><i data-lucide="check" style="width:16px;height:16px;color:var(--tertiary);flex-shrink:0"></i> White-label + center settings</div>
+          <div style="display:flex;align-items:center;gap:.6rem;font-size:.82rem"><i data-lucide="check" style="width:16px;height:16px;color:var(--tertiary);flex-shrink:0"></i> Dedicated database per center</div>
+          <div style="display:flex;align-items:center;gap:.6rem;font-size:.82rem"><i data-lucide="check" style="width:16px;height:16px;color:var(--tertiary);flex-shrink:0"></i> Holiday + closed-date management</div>
+        </div>
+      </div>
+    </div>
+    <div class="centered" style="margin-top:2.5rem"><a href="#" class="btn btn-founding btn-full" data-cta="Become a Founding Center">Become a Founding Center</a></div>
+  </div>
+</section>
+
+<!-- ==================== ORIGIN STORY ==================== -->
+<section class="section bg-cool" id="why">
+  <div class="section-inner">
+    <span class="script script-xl" style="color:var(--secondary-text)">Here's Why We Built This</span>
+    <h2 class="headline">She didn't open her center to fight with software.</h2>
+    <div class="curve curve-left"></div>
+    <div class="feature-split" style="gap:3rem;align-items:start">
+      <div style="font-size:.92rem;color:var(--text-light);line-height:1.8">
+        <p style="margin-bottom:1.2rem">Our first client runs a franchise tutoring center with over 300 students. She got into education for the kids, but found herself spending more time managing broken tools than working with families.</p>
+        <p style="margin-bottom:1.2rem">She wasn't on paper. She'd already invested in real platforms: all-in-one marketing tools, funnel builders, CRM systems that promised to handle everything. <span style="background:rgba(224,113,44,.08);color:var(--accent-text);padding:.15rem .5rem;border-radius:4px;font-weight:600">Thousands of dollars</span> across multiple platforms.</p>
+        <p style="margin-bottom:1.2rem">But every platform had the same fundamental flaw: <strong style="color:var(--text)">one-to-one data relationships.</strong> One parent email, one child. A mom with three kids needed three separate accounts. That's not how families work. No amount of custom fields could fix a structural data problem.</p>
+        <p style="margin-bottom:1.2rem">The marketing tools were great at selling online courses. The CRM systems were built for sales pipelines. None of them understood that a tutoring center has 300 students walking through a physical door. <strong style="color:var(--text)">They were digital-first tools being forced into a physical-operations world.</strong></p>
+        <p>So we built it differently. <strong style="color:var(--text)">The Center Book starts with the database:</strong> real multi-to-multi relationships where one parent connects to multiple children, billing and communication contacts are separate, and every piece of the platform reads from the same source of truth.</p>
+      </div>
+      <div class="pain-stack">
+        <h3>The problems we kept seeing</h3>
+        <div class="pain-item"><div class="pain-item-icon"><i data-lucide="clipboard-list" style="width:16px;height:16px;color:var(--neutral)"></i></div><div class="pain-item-text"><strong>Paper sign-in sheets and manual check-in</strong><span>No instant access to medical alerts or session history</span></div></div>
+        <div class="pain-item"><div class="pain-item-icon"><i data-lucide="search" style="width:16px;height:16px;color:var(--neutral)"></i></div><div class="pain-item-text"><strong>No real-time classroom visibility</strong><span>No way to see progress without walking the room</span></div></div>
+        <div class="pain-item"><div class="pain-item-icon"><i data-lucide="phone" style="width:16px;height:16px;color:var(--neutral)"></i></div><div class="pain-item-text"><strong>Pickup texts from personal phones</strong><span>No automation, no consent tracking, no records</span></div></div>
+        <div class="pain-item"><div class="pain-item-icon"><i data-lucide="archive" style="width:16px;height:16px;color:var(--neutral)"></i></div><div class="pain-item-text"><strong>Student data scattered across systems</strong><span>Some in spreadsheets, some undocumented</span></div></div>
+        <div class="pain-item"><div class="pain-item-icon"><i data-lucide="users" style="width:16px;height:16px;color:var(--neutral)"></i></div><div class="pain-item-text"><strong>Every system required one email per child</strong><span>Families forced into duplicate accounts</span></div></div>
+        <div style="margin-top:1rem;padding:1rem;border-radius:8px;background:linear-gradient(135deg,var(--primary-ultra-light),var(--secondary-ultra-light))">
+          <strong style="font-size:.8rem;color:var(--text)">The common thread?</strong><br><span style="font-size:.72rem;color:var(--neutral)">Great educators spending their energy on tools instead of students</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== FOUNDING CENTER ==================== -->
+<section class="section bg-dark" id="founding">
+  <div class="blob" style="width:400px;height:400px;top:-80px;right:-80px;background:radial-gradient(circle,rgba(224,113,44,.12),transparent 60%)"></div>
+  <div class="blob" style="width:300px;height:300px;bottom:-60px;left:-40px;background:radial-gradient(circle,rgba(0,171,189,.15),transparent 60%)"></div>
+  <div class="section-inner centered">
+    <span class="script script-hero" style="color:var(--accent-light)">Limited Availability</span>
+    <h2 class="headline" style="font-size:clamp(2rem,4vw,3rem)">Become a Founding Center</h2>
+    <p class="subhead" style="max-width:600px">We're opening The Center Book to a small group of centers who want to be first. Founding centers get preferred pricing, direct input on the roadmap, and the full platform from day one.</p>
+    <div class="founding-benefits">
+      <div class="founding-benefit"><div class="benefit-icon"><i data-lucide="lock" style="width:24px;height:24px;color:var(--accent-light)"></i></div><h4>Lock in your rate</h4><p>Founding centers get a lower monthly rate that stays locked in, even as the platform grows and the price goes up.</p></div>
+      <div class="founding-benefit"><div class="benefit-icon"><i data-lucide="move" style="width:24px;height:24px;color:var(--accent-light)"></i></div><h4>Shape the platform</h4><p>Your feedback directly influences what gets built next. You're not just a user. You're a partner building what your center needs.</p></div>
+      <div class="founding-benefit"><div class="benefit-icon"><i data-lucide="check" style="width:24px;height:24px;color:var(--accent-light)"></i></div><h4>The full platform from day one</h4><p>Operations, communication, scheduling, analytics, website, portal, and email. All built. All included. One system.</p></div>
+    </div>
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap"><a href="#" class="btn btn-white" data-cta="Become a Founding Center">Apply to Be a Founding Center</a><a href="#" class="btn" style="border-color:rgba(255,255,255,.3);color:#fff" data-cta="Book a Demo">Book a Demo</a></div>
+    <p style="font-size:.72rem;color:rgba(255,255,255,.4);margin-top:1.2rem">Limited spots. Each center gets a dedicated installation built from the ground up.</p>
+  </div>
+</section>
+
+<!-- TESTIMONIAL -->
+<section class="testi-break bg-warm">
+  <div class="testi-card"><span class="testi-mark">&#8220;</span>
+    <blockquote>"This is the brain of our center. It manages everything from signing in and out to parent relationships. <strong>I can't imagine running without it.</strong>"</blockquote>
+    <div class="testi-person"><div class="testi-avatar">BS</div><div class="testi-meta"><span class="testi-name">Bincy S.</span><span class="testi-role">Founding Center #1</span></div></div>
+  </div>
+</section>
+
+<!-- ==================== FINAL CTA ==================== -->
+<section class="section bg-cool" style="text-align:center">
+  <div class="section-inner centered">
+    <span class="script script-hero" style="color:var(--secondary-text)">Ready to See It?</span>
+    <h2 class="headline">You didn't get into education to manage spreadsheets.<br>Let's get you back to the kids.</h2>
+    <div class="curve"></div>
+    <p class="subhead" style="max-width:600px">Book a call and see the platform running a center with 334 students, 200 parents, and 15 staff members every single day.</p>
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap"><a href="#" class="btn btn-founding" data-cta="Become a Founding Center">Become a Founding Center</a><a href="#" class="btn btn-demo" data-cta="Book a Demo">Book a Demo</a></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer"><div class="footer-inner" style="grid-template-columns:2fr 1fr;align-items:center"><div class="footer-brand"><svg id="footer-logo" data-name="stacked color" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1824.18 309.41"> <defs> <style> .fl1 { fill: #fff; } </style> </defs> <path class="fl1" d="M195.02,103.21c16.82,5.24,30.08,16.87,33.3,34.8,3.41,19.02-2,39.49-19.78,50.42,6.14,2.73,11.56,5.51,16.37,9.84,14.91,13.43,17.31,35.6,13.2,54.26-3.33,15.09-13.19,27.09-27.02,33.86-8.89,4.39-18.15,6.06-28.22,6.93l-83.52.07-.05-83.05c-30.24-1.37-56.71-18.23-70.63-44.78-5.18-9.49-8.28-19.54-10.27-30.31-4.84-31.09-.64-64.26,19.74-89.25,22.79-27.96,58.64-35.8,92.8-27.78,26.97,6.72,48.39,26.38,57.42,52.91l-32.64,12.06c-3.56-8.88-8.2-16.77-15.53-22.93-9.62-8.13-21.63-11.8-34.3-11.52-26.53-.21-45.82,16.04-51.8,41.63-5.39,23.06-3.12,55.33,14.96,72.86,8.28,7.89,18.75,12.59,30.27,13.59v-77.33s69.94.03,69.94.03c9.01,0,17.33,1.15,25.76,3.7ZM193.16,154.07c.51-9.15-4.82-16.69-13.19-19.48-3.32-1.26-6.69-1.45-10.3-1.96l-34.33.06v44.57s37.88-.13,37.88-.13c12.13-1.27,20.5-10.67,19.95-23.06ZM202.83,226.89c-1.9-7.71-7.68-13.41-15.2-15.77-4.51-1.34-8.98-1.69-13.78-1.71l-38.53.06.03,50.78,40.31-.09c5.81-.33,11.2-.98,16.36-3.56,11.14-5.36,13.52-18.72,10.81-29.71Z"/> <g> <g> <path class="fl1" d="M499.3,149.37c0-37.77,27.47-65.05,64.38-65.05,19.57,0,36.39,7.41,47.55,21.14l-14.42,14.28c-8.76-9.94-19.57-14.82-32.1-14.82-24.89,0-42.92,18.43-42.92,44.45s18.03,44.45,42.92,44.45c12.53,0,23.35-4.88,32.1-15l14.42,14.46c-11.16,13.73-27.98,21.14-47.73,21.14-36.74,0-64.21-27.29-64.21-65.05Z"/> <path class="fl1" d="M722.82,192.92v19.7h-90.13v-126.49h87.73v19.7h-65.41v32.89h58.03v19.33h-58.03v34.88h67.81Z"/> <path class="fl1" d="M854.49,86.13v126.49h-18.37l-66.27-85.65v85.65h-22.15v-126.49h18.37l66.27,85.65v-85.65h22.15Z"/> <path class="fl1" d="M911.14,106h-39.83v-19.88h101.98v19.88h-39.83v106.61h-22.32v-106.61Z"/> <path class="fl1" d="M1080.24,192.92v19.7h-90.13v-126.49h87.73v19.7h-65.41v32.89h58.03v19.33h-58.03v34.88h67.81Z"/> <path class="fl1" d="M1183.76,212.62l-24.55-37.04c-1.55.18-3.09.18-4.64.18h-27.12v36.86h-22.32v-126.49h49.44c31.59,0,51.16,16.99,51.16,44.99,0,19.15-9.27,33.25-25.58,39.94l27.64,41.56h-24.04ZM1153.54,106h-26.09v50.42h26.09c19.57,0,29.7-9.4,29.7-25.3s-10.13-25.12-29.7-25.12Z"/> <path class="fl1" d="M1384.78,178.28c0,21.68-16.14,34.33-47.04,34.33h-59.74v-126.49h56.31c28.84,0,44.29,12.83,44.29,32.89,0,13.01-6.18,22.59-15.45,27.83,12.88,4.34,21.63,15,21.63,31.44ZM1300.32,104.56v34.88h31.59c15.45,0,24.21-5.78,24.21-17.35s-8.76-17.53-24.21-17.53h-31.59ZM1362.29,175.93c0-12.65-9.1-18.25-25.92-18.25h-36.05v36.5h36.05c16.82,0,25.92-5.6,25.92-18.25Z"/> <path class="fl1" d="M1400.06,149.37c0-37.41,27.47-65.05,64.72-65.05s64.72,27.47,64.72,65.05-27.47,65.05-64.72,65.05-64.72-27.65-64.72-65.05ZM1507.01,149.37c0-25.84-18.03-44.45-42.23-44.45s-42.23,18.61-42.23,44.45,18.03,44.45,42.23,44.45,42.23-18.61,42.23-44.45Z"/> <path class="fl1" d="M1544.6,149.37c0-37.41,27.47-65.05,64.72-65.05s64.72,27.47,64.72,65.05-27.47,65.05-64.72,65.05-64.72-27.65-64.72-65.05ZM1651.56,149.37c0-25.84-18.03-44.45-42.23-44.45s-42.23,18.61-42.23,44.45,18.03,44.45,42.23,44.45,42.23-18.61,42.23-44.45Z"/> <path class="fl1" d="M1739.11,159.67l-19.06,20.6v32.35h-22.32v-126.49h22.32v64.87l59.4-64.87h25.06l-50.47,56.56,53.56,69.93h-26.09l-42.4-52.95Z"/> </g> <g> <g> <path class="fl1" d="M316.02,223.22c-1.91,0-2.86-1.5-2.86-4.51,0-4.41,2.48-12.13,7.45-23.17,4.97-11.03,12.36-25.47,22.19-43.33-3.81,0-7.4.48-10.76,1.43-3.36.95-5.14,2.13-5.34,3.54-.1.4-.33.78-.68,1.13s-.88.53-1.58.53c-1.61,0-2.41-.8-2.41-2.41,0-2.61,2.05-4.76,6.17-6.47,4.11-1.7,9.88-2.56,17.3-2.56l10.38-17.15c.7-1.1,1.45-2.33,2.26-3.69.8-1.35,1.7-2.83,2.71-4.44,1-1.4,2.16-2.11,3.46-2.11.8,0,1.4.23,1.81.68.4.45.6.93.6,1.43,0,1.5-2.21,5.52-6.62,12.03-5.52,8.12-8.48,12.54-8.87,13.24,1.5,0,3.76.13,6.77.38,3.01.25,6.57.63,10.68,1.13,1.5.1,2.26.85,2.26,2.26,0,1.61-.9,2.41-2.71,2.41-.7,0-2.11-.12-4.21-.38-2.11-.25-4.36-.48-6.77-.68-2.41-.2-4.46-.25-6.17-.15l-2.26.15c-20.36,35.8-30.49,58.07-30.39,66.79l.15,1.2v.3c0,1.6-.85,2.41-2.56,2.41Z"/> <path class="fl1" d="M316.02,223.85c-1.59,0-3.48-.89-3.48-5.14,0-4.54,2.45-12.2,7.5-23.42,4.87-10.82,12.17-25.09,21.7-42.43-3.35.08-6.54.55-9.52,1.39-3.84,1.09-4.78,2.25-4.89,3.02-.14.57-.42,1.05-.85,1.48-.47.47-1.15.71-2.02.71-1.96,0-3.03-1.08-3.03-3.03,0-2.87,2.21-5.24,6.55-7.05,4.1-1.7,9.88-2.58,17.19-2.6l10.2-16.85c.71-1.11,1.45-2.33,2.25-3.68.8-1.36,1.71-2.84,2.71-4.45,1.14-1.6,2.48-2.4,3.99-2.4.98,0,1.75.3,2.27.89.5.57.76,1.19.76,1.85,0,1.05-.7,3.48-6.73,12.38-4.34,6.39-7.11,10.5-8.27,12.28,1.43.04,3.31.16,5.7.36,3.01.25,6.61.63,10.7,1.13,1.8.12,2.81,1.14,2.81,2.88,0,1.96-1.18,3.03-3.33,3.03-.73,0-2.18-.13-4.29-.38-2.11-.25-4.38-.48-6.75-.68-2.36-.2-4.4-.25-6.08-.15l-1.92.13c-20.1,35.37-30.24,57.63-30.14,66.18l.15,1.51c0,1.96-1.13,3.03-3.18,3.03ZM342.8,151.59h1.06l-.51.93c-9.77,17.74-17.22,32.3-22.17,43.28-4.91,10.9-7.39,18.61-7.39,22.91,0,3.89,1.62,3.89,2.23,3.89,1.35,0,1.93-.53,1.93-1.78v-.3l-.15-1.13c-.11-8.99,9.86-30.94,30.46-67.18l.17-.29,2.59-.17c1.74-.1,3.84-.05,6.26.15,2.38.2,4.67.43,6.79.68,2.06.25,3.45.37,4.14.37,1.84,0,2.08-.9,2.08-1.78,0-1.07-.5-1.55-1.67-1.63-4.11-.5-7.7-.88-10.69-1.13-2.99-.25-5.25-.37-6.72-.37h-1.08l.53-.93c.41-.72,3.32-5.07,8.9-13.28,5.38-7.95,6.51-10.74,6.51-11.68,0-.35-.15-.68-.44-1.02-.28-.31-.72-.47-1.34-.47-1.1,0-2.07.6-2.95,1.85-.98,1.57-1.88,3.04-2.68,4.39-.81,1.36-1.56,2.6-2.27,3.7l-10.55,17.44h-.35c-7.3,0-13.04.84-17.06,2.51-3.84,1.59-5.78,3.57-5.78,5.89,0,1.27.52,1.78,1.78,1.78.53,0,.91-.12,1.14-.34.27-.27.44-.55.51-.84.23-1.62,2.12-2.95,5.78-3.98,3.4-.96,7.08-1.45,10.93-1.45Z"/> </g> <g> <path class="fl1" d="M348.51,215.55c-1.61,0-2.41-.8-2.41-2.41,0-2.11.75-5.44,2.26-10,1.51-4.56,3.48-9.83,5.94-15.8,2.46-5.97,5.09-12.11,7.9-18.43,1.6-3.51,3.26-6.94,4.97-10.3,1.7-3.36,3.31-6.29,4.81-8.8,14.84-25.07,24.07-37.61,27.68-37.61,1.4,0,2.11.7,2.11,2.11,0,.9-.68,2.58-2.03,5.04-1.35,2.46-3.11,5.32-5.26,8.57-2.16,3.26-4.46,6.54-6.92,9.85-2.46,3.31-4.76,6.34-6.92,9.1-2.16,2.76-3.89,4.84-5.19,6.24-1.1,1.3-2.33,3.21-3.69,5.72-1.35,2.51-2.68,5.09-3.99,7.75-1.3,2.66-2.36,4.99-3.16,7l-5.72,14.14c1.5-2,3.46-4.26,5.87-6.77,5.72-6.32,11.66-11.11,17.83-14.37,6.17-3.26,11.36-4.89,15.57-4.89,2.31,0,4.16.7,5.57,2.11,1.4,1.41,2.11,3.11,2.11,5.11,0,3.91-2.56,10.48-7.67,19.71-5.11,9.13-7.67,14.74-7.67,16.85,0,1.1.6,1.65,1.81,1.65,2.81,0,5.87-1.03,9.18-3.08,3.31-2.05,6.72-4.69,10.23-7.9,3.51-3.21,6.92-6.42,10.23-9.63.4-.4,1-.6,1.81-.6,1.5,0,2.26.6,2.26,1.81,0,1.1-.7,2.36-2.11,3.76-6.72,6.72-12.49,11.73-17.3,15.04-4.81,3.31-9.88,4.96-15.19,4.96-4.01,0-6.02-1.85-6.02-5.57,0-1.4.25-2.76.75-4.06.5-1.3,1.3-3.06,2.41-5.26l6.92-13.69c1.7-3.41,2.96-6.27,3.76-8.57.8-2.31,1.2-4.06,1.2-5.27,0-1.7-1.05-2.56-3.16-2.56-3.71,0-8.05,1.48-13.01,4.44-4.96,2.96-10.26,7.4-15.87,13.31-3.21,3.41-6.09,7.02-8.65,10.83-2.56,3.81-4.59,7.92-6.09,12.34l-1.81,5.26c-.7,1.9-1.81,2.86-3.31,2.86Z"/> <path class="fl1" d="M348.51,216.17c-1.96,0-3.03-1.08-3.03-3.03,0-2.19.75-5.53,2.29-10.2,1.52-4.6,3.52-9.93,5.96-15.84,2.45-5.94,5.11-12.15,7.9-18.44,1.59-3.48,3.26-6.95,4.98-10.33,1.7-3.35,3.33-6.32,4.84-8.84,20.12-33.98,25.74-37.91,28.22-37.91,1.76,0,2.73.97,2.73,2.73,0,1.04-.67,2.73-2.11,5.34-1.35,2.45-3.13,5.35-5.29,8.62-2.14,3.23-4.47,6.56-6.94,9.88-2.46,3.31-4.79,6.37-6.93,9.11-2.15,2.75-3.91,4.87-5.22,6.28-1.05,1.24-2.26,3.13-3.59,5.59-1.36,2.52-2.7,5.12-3.97,7.73-1.29,2.63-2.35,4.97-3.14,6.95l-4.16,10.29c.98-1.13,2.08-2.33,3.28-3.58,5.73-6.33,11.78-11.21,17.99-14.49,6.23-3.29,11.57-4.96,15.86-4.96,2.46,0,4.49.77,6.01,2.29,1.52,1.52,2.29,3.39,2.29,5.56,0,4.06-2.54,10.6-7.75,20.01-6.28,11.2-7.59,15.18-7.59,16.55,0,.64.2,1.03,1.18,1.03,2.68,0,5.65-1.01,8.85-2.99,3.26-2.02,6.67-4.65,10.14-7.83,3.51-3.21,6.95-6.45,10.22-9.62.51-.51,1.27-.78,2.24-.78,2.51,0,2.88,1.52,2.88,2.43,0,1.29-.75,2.66-2.29,4.2-6.71,6.71-12.56,11.8-17.39,15.12-4.9,3.37-10.13,5.07-15.55,5.07-4.34,0-6.64-2.14-6.64-6.19,0-1.48.27-2.92.79-4.29.51-1.32,1.33-3.11,2.43-5.32l6.92-13.69c1.68-3.37,2.94-6.23,3.73-8.5.77-2.23,1.17-3.94,1.17-5.06,0-.9-.29-1.93-2.54-1.93-3.58,0-7.85,1.46-12.69,4.35-4.89,2.92-10.19,7.36-15.74,13.21-3.16,3.36-6.05,6.98-8.58,10.75-2.51,3.75-4.54,7.85-6.02,12.19l-1.81,5.27c-.8,2.18-2.12,3.28-3.9,3.28ZM399.66,112.83c-2.31,0-8.89,6.47-27.14,37.3-1.5,2.49-3.11,5.44-4.79,8.77-1.71,3.37-3.38,6.83-4.95,10.28-2.79,6.28-5.45,12.47-7.89,18.41-2.42,5.88-4.42,11.18-5.93,15.75-1.48,4.48-2.23,7.78-2.23,9.81,0,1.27.52,1.78,1.78,1.78s2.12-.8,2.72-2.45l1.8-5.25c1.52-4.44,3.59-8.64,6.17-12.48,2.57-3.83,5.5-7.5,8.71-10.91,5.63-5.93,11.01-10.44,16-13.42,5.04-3,9.53-4.53,13.33-4.53,3.29,0,3.79,1.99,3.79,3.18,0,1.28-.41,3.07-1.24,5.47-.81,2.32-2.08,5.23-3.79,8.65l-6.92,13.69c-1.09,2.17-1.89,3.92-2.38,5.21-.47,1.22-.71,2.51-.71,3.84,0,3.37,1.71,4.94,5.39,4.94,5.16,0,10.15-1.63,14.84-4.85,4.76-3.28,10.55-8.31,17.21-14.97,1.28-1.28,1.92-2.39,1.92-3.32,0-.61-.2-1.18-1.63-1.18-.63,0-1.08.14-1.36.42-3.28,3.19-6.73,6.43-10.25,9.65-3.53,3.23-7,5.91-10.32,7.97-3.39,2.11-6.59,3.18-9.51,3.18-1.54,0-2.43-.83-2.43-2.28,0-2.24,2.54-7.85,7.75-17.15,5.04-9.08,7.59-15.61,7.59-19.4,0-1.85-.63-3.38-1.92-4.67-1.3-1.29-2.97-1.92-5.12-1.92-4.09,0-9.23,1.62-15.28,4.82-6.08,3.21-12.01,8-17.65,14.23-2.39,2.49-4.35,4.75-5.83,6.72l-2.87,3.83,7.51-18.58c.8-2.01,1.88-4.38,3.18-7.04,1.28-2.62,2.63-5.23,4-7.77,1.37-2.54,2.63-4.5,3.76-5.82,1.31-1.41,3.04-3.5,5.17-6.22,2.14-2.73,4.46-5.79,6.91-9.09,2.45-3.31,4.78-6.61,6.9-9.83,2.14-3.24,3.91-6.11,5.24-8.53,1.62-2.93,1.95-4.19,1.95-4.74,0-1.05-.43-1.48-1.48-1.48Z"/> </g> <g> <path class="fl1" d="M432,215.55c-4.21,0-7.52-1.45-9.93-4.36s-3.61-6.47-3.61-10.68c0-7.22,2.41-14.64,7.22-22.26,1.3-2.11,2.81-4.19,4.51-6.24,1.7-2.05,3.56-4.04,5.57-5.94,3.01-2.91,6.17-5.31,9.48-7.22,3.31-1.9,6.52-2.86,9.63-2.86,5.11,0,7.67,2.41,7.67,7.22,0,6.02-3.51,11.49-10.53,16.4-6.52,4.41-12.94,6.62-19.26,6.62-1.1,0-2.08-.07-2.93-.23-.85-.15-1.63-.32-2.33-.53-1,1.91-1.91,4.36-2.71,7.37-.8,3.01-1.2,5.62-1.2,7.82,0,6.62,2.91,9.93,8.72,9.93,4.71,0,9.18-.83,13.39-2.48,4.21-1.65,9.23-4.79,15.04-9.4,3.61-2.81,6.32-5.06,8.12-6.77,1.81-1.7,3.76-3.51,5.87-5.42.6-.4,1.15-.6,1.65-.6s1,.15,1.5.45c.5.3.75.75.75,1.35,0,1.1-1,2.66-3.01,4.66-1.71,1.61-3.51,3.29-5.42,5.04-1.91,1.76-4.91,4.19-9.03,7.3-4.41,3.41-9.23,6.07-14.44,7.97-5.22,1.9-10.13,2.86-14.74,2.86ZM431.85,181.4c3.21,0,6.27-.5,9.18-1.5,2.91-1,5.66-2.46,8.27-4.36,5.81-4.31,8.72-8.37,8.72-12.19,0-1.7-1.05-2.56-3.16-2.56-4.01,0-8.68,2.46-13.99,7.37-2.61,2.41-4.74,4.59-6.39,6.54s-3.19,4.09-4.59,6.39c.6.2,1.25.3,1.96.3Z"/> <path class="fl1" d="M432,216.17c-4.39,0-7.89-1.54-10.41-4.59-2.49-3.01-3.75-6.74-3.75-11.08,0-7.31,2.46-14.91,7.32-22.6,1.31-2.12,2.84-4.24,4.56-6.31,1.72-2.07,3.61-4.09,5.62-6,3.03-2.92,6.25-5.38,9.6-7.31,3.39-1.95,6.74-2.94,9.94-2.94,5.43,0,8.3,2.71,8.3,7.85,0,6.21-3.63,11.89-10.8,16.91-6.6,4.47-13.2,6.73-19.61,6.73-1.14,0-2.16-.08-3.04-.24-.68-.12-1.32-.26-1.9-.41-.89,1.79-1.7,4.08-2.43,6.8-.78,2.94-1.18,5.51-1.18,7.66,0,6.26,2.65,9.3,8.1,9.3,4.61,0,9.04-.82,13.16-2.44,4.13-1.62,9.14-4.75,14.88-9.31,3.59-2.79,6.31-5.06,8.08-6.73,1.82-1.72,3.8-3.55,5.88-5.43,1.55-1.05,2.68-.95,3.9-.22.69.42,1.06,1.07,1.06,1.89,0,1.29-1.04,2.96-3.19,5.11-1.72,1.62-3.53,3.3-5.43,5.06-1.91,1.76-4.96,4.23-9.07,7.33-4.44,3.43-9.36,6.14-14.6,8.06-5.26,1.92-10.3,2.9-14.96,2.9ZM454.87,156.6c-2.98,0-6.12.93-9.32,2.78-3.25,1.87-6.4,4.27-9.35,7.13-1.98,1.88-3.83,3.86-5.52,5.89-1.68,2.02-3.18,4.1-4.46,6.17-4.73,7.49-7.13,14.87-7.13,21.93,0,4.04,1.17,7.5,3.47,10.28,2.3,2.78,5.39,4.13,9.45,4.13,4.51,0,9.4-.95,14.53-2.82,5.13-1.87,9.93-4.52,14.27-7.88,4.08-3.09,7.1-5.53,8.99-7.26,1.9-1.75,3.71-3.43,5.41-5.04,2.32-2.32,2.81-3.57,2.81-4.21,0-.38-.13-.63-.45-.82-.8-.48-1.48-.54-2.49.13-2,1.82-3.97,3.63-5.78,5.35-1.8,1.71-4.55,4-8.17,6.81-5.83,4.63-10.95,7.82-15.2,9.49-4.26,1.68-8.85,2.53-13.62,2.53-6.2,0-9.35-3.55-9.35-10.55,0-2.26.41-4.94,1.22-7.98.81-3.04,1.74-5.57,2.76-7.5l.24-.45.49.14c.66.19,1.42.36,2.27.51.81.14,1.76.22,2.83.22,6.16,0,12.52-2.19,18.91-6.51,6.8-4.76,10.25-10.11,10.25-15.88,0-4.44-2.3-6.6-7.05-6.6ZM431.85,182.03c-.77,0-1.5-.11-2.16-.33l-.74-.25.41-.67c1.41-2.32,2.98-4.5,4.65-6.47,1.67-1.97,3.84-4.19,6.45-6.6,5.41-5,10.26-7.54,14.41-7.54,3.29,0,3.78,1.99,3.78,3.18,0,4-3.02,8.27-8.98,12.69-2.66,1.94-5.5,3.44-8.44,4.45-2.96,1.02-6.12,1.54-9.38,1.54ZM430.88,180.7c.31.05.63.08.97.08,3.12,0,6.14-.5,8.97-1.47,2.83-.97,5.56-2.41,8.11-4.28,5.62-4.17,8.47-8.1,8.47-11.68,0-.9-.29-1.93-2.53-1.93-3.83,0-8.39,2.42-13.57,7.21-2.57,2.37-4.7,4.55-6.34,6.49-1.45,1.72-2.82,3.59-4.08,5.59Z"/> </g> </g> </g> </svg><p>The all-in-one operations platform built from the ground up for franchise and independent tutoring centers.</p></div><div class="footer-cta"><a href="#" class="btn btn-founding" data-cta="Book a Demo">Book a Demo</a></div></div><div class="footer-bottom"><span>&copy; 2026 The Center Book LLC. All rights reserved.</span><span>Built with care in Grand Rapids, Michigan</span></div></footer>
+
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<script>lucide.createIcons();</script>
+<script>
+const nav=document.getElementById('nav');window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>20)});
+const obs=new IntersectionObserver(e=>{e.forEach(el=>{if(el.isIntersecting){el.target.style.opacity='1';el.target.style.transform='translateY(0)'}});},{threshold:.06,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.feature-split,.testi-card,.who-card,.founding-benefit,.check-item,.included-diagram,.pain-item').forEach(el=>{el.style.opacity='0';el.style.transform='translateY(30px)';el.style.transition='opacity .8s ease,transform .8s ease';obs.observe(el);});
+</script>
+
+<!-- CONTACT MODAL -->
+<div class="modal-overlay" id="ctaModal" onclick="if(event.target===this)closeCTA()">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="ctaHeading">
+    <button class="modal-close" onclick="closeCTA()" aria-label="Close">&times;</button>
+    <div id="ctaForm">
+      <h3 id="ctaHeading">Book a Demo</h3>
+      <p class="modal-sub">Tell us a bit about your center and we'll be in touch shortly.</p>
+      <label>Your name <span class="req">*</span></label>
+      <input type="text" id="f_name" autocomplete="name">
+      <label>Center name <span class="req">*</span></label>
+      <input type="text" id="f_center" autocomplete="organization">
+      <label>Email <span class="req">*</span></label>
+      <input type="email" id="f_email" autocomplete="email">
+      <label>Phone <span style="color:var(--neutral);font-weight:500">(optional)</span></label>
+      <input type="tel" id="f_phone" autocomplete="tel">
+      <label>Message</label>
+      <textarea id="f_message" placeholder="Anything you'd like us to know?"></textarea>
+      <button class="modal-submit" onclick="submitCTA()">Send</button>
+    </div>
+    <div id="ctaDone" class="modal-success" style="display:none">
+      <div class="ok">&#10003;</div>
+      <h3>Thanks, we've got it.</h3>
+      <p class="modal-sub">Your message is on its way to the team. We'll reach out at the email you provided.</p>
+      <button class="modal-submit" onclick="closeCTA()">Close</button>
+    </div>
+  </div>
+</div>
+<script>
+function openCTA(h){var m=document.getElementById('ctaModal');document.getElementById('ctaHeading').textContent=h||'Get in Touch';document.getElementById('ctaForm').style.display='';document.getElementById('ctaDone').style.display='none';m.classList.add('open');document.body.style.overflow='hidden';}
+function closeCTA(){document.getElementById('ctaModal').classList.remove('open');document.body.style.overflow='';}
+document.addEventListener('click',function(e){var el=e.target.closest('[data-cta]');if(el){e.preventDefault();openCTA(el.getAttribute('data-cta'));}});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeCTA();});
+function submitCTA(){
+  var name=document.getElementById('f_name'),center=document.getElementById('f_center'),email=document.getElementById('f_email');
+  var ok=true;[name,center,email].forEach(function(f){f.classList.remove('field-err');if(!f.value.trim()){f.classList.add('field-err');ok=false;}});
+  var ev=/^[^@\s]+@[^@\s]+\.[^@\s]+$/;if(email.value.trim()&&!ev.test(email.value.trim())){email.classList.add('field-err');ok=false;}
+  if(!ok)return;
+  /* PRODUCTION: POST these fields to /api/contact (Vercel serverless -> SendGrid -> bincysines@gmail.com). Preview only shows success. */
+  var payload={topic:document.getElementById('ctaHeading').textContent,name:name.value,center:center.value,email:email.value,phone:document.getElementById('f_phone').value,message:document.getElementById('f_message').value};
+  console.log('contact payload (preview only):',payload);
+  document.getElementById('ctaForm').style.display='none';document.getElementById('ctaDone').style.display='';
+}
+</script>
+</body>
+</html>
