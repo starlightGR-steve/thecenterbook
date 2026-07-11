@@ -1,0 +1,39 @@
+---
+import '../styles/global.css';
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Center Book - Built for Tutoring Centers</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Oooh+Baby&display=swap" rel="stylesheet">
+</head>
+<body>
+<slot />
+
+<script is:inline src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<script is:inline>lucide.createIcons();</script>
+<script is:inline>
+const nav=document.getElementById('nav');window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>20)});
+const obs=new IntersectionObserver(e=>{e.forEach(el=>{if(el.isIntersecting){el.target.style.opacity='1';el.target.style.transform='translateY(0)'}});},{threshold:.06,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.feature-split,.testi-card,.who-card,.founding-benefit,.check-item,.included-diagram,.pain-item').forEach(el=>{el.style.opacity='0';el.style.transform='translateY(30px)';el.style.transition='opacity .8s ease,transform .8s ease';obs.observe(el);});
+</script>
+<script is:inline>
+function openCTA(h){var m=document.getElementById('ctaModal');document.getElementById('ctaHeading').textContent=h||'Get in Touch';document.getElementById('ctaForm').style.display='';document.getElementById('ctaDone').style.display='none';m.classList.add('open');document.body.style.overflow='hidden';}
+function closeCTA(){document.getElementById('ctaModal').classList.remove('open');document.body.style.overflow='';}
+document.addEventListener('click',function(e){var el=e.target.closest('[data-cta]');if(el){e.preventDefault();openCTA(el.getAttribute('data-cta'));}});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeCTA();});
+function submitCTA(){
+  var name=document.getElementById('f_name'),center=document.getElementById('f_center'),email=document.getElementById('f_email');
+  var ok=true;[name,center,email].forEach(function(f){f.classList.remove('field-err');if(!f.value.trim()){f.classList.add('field-err');ok=false;}});
+  var ev=/^[^@\s]+@[^@\s]+\.[^@\s]+$/;if(email.value.trim()&&!ev.test(email.value.trim())){email.classList.add('field-err');ok=false;}
+  if(!ok)return;
+  /* PRODUCTION: POST these fields to /api/contact (Vercel serverless -> SendGrid -> bincysines@gmail.com). Preview only shows success. */
+  var payload={topic:document.getElementById('ctaHeading').textContent,name:name.value,center:center.value,email:email.value,phone:document.getElementById('f_phone').value,message:document.getElementById('f_message').value};
+  console.log('contact payload (preview only):',payload);
+  document.getElementById('ctaForm').style.display='none';document.getElementById('ctaDone').style.display='';
+}
+</script>
+</body>
+</html>
