@@ -145,6 +145,7 @@ body{font-family:var(--font-primary);font-weight:500;color:var(--text);line-heig
   .who-cards,.founding-benefits{grid-template-columns:1fr}.included-visual{grid-template-columns:1fr}
   .sp-inner{gap:1.5rem}.sp-div{display:none}.nav-links{display:none}
   .footer-inner{grid-template-columns:1fr}.blob,.dots{display:none}
+  .fw3-stats,.fw3-cols{grid-template-columns:1fr}.fw3-cols{padding:1.75rem}
 }
 @media(max-width:600px){
   .btn{width:100%;text-align:center}
