@@ -493,17 +493,27 @@ git add -A && git commit -m "fix: visual parity corrections"
 
 **Interfaces:** none.
 
-> **Approval gate:** This task pushes to a remote and deploys publicly. Do NOT run it without Steve's explicit go-ahead, and confirm the GitHub account/repo name and Vercel account/team first.
+> **Approval gate:** This task pushes to a remote and deploys publicly, and OVERWRITES an existing repo. Do NOT run it without Steve's explicit go-ahead at execution time.
 
-- [ ] **Step 1: Confirm** with Steve: GitHub owner + repo name (e.g. `starlightgr/thecenterbook.com` or personal), public vs private, and which Vercel team/account.
+**Target repo (confirmed by Steve 2026-07-11):** `https://github.com/starlightGR-steve/thecenterbook`. The repo already exists with unused contents — Steve wants it emptied and replaced with this fresh Astro project ("the contents in there are not being used"). We replace its entire history by force-pushing our local `main`.
 
-- [ ] **Step 2: Create the GitHub repo and push** (using `gh`, once repo name confirmed)
+- [ ] **Step 1: Inspect what's currently in the remote** (safety check before overwrite)
+
+```bash
+gh repo view starlightGR-steve/thecenterbook
+gh api repos/starlightGR-steve/thecenterbook/contents --jq '.[].name'
+```
+If anything there looks like it should NOT be wiped (contradicts "not being used"), STOP and surface it to Steve. Otherwise proceed.
+
+- [ ] **Step 2: Point origin at the repo and force-push our fresh history**
 
 ```bash
 cd "E:/Desktop/thecenterbook.com"
-gh repo create <owner>/<name> --private --source=. --remote=origin --push
+git remote add origin https://github.com/starlightGR-steve/thecenterbook.git
+git branch -M main
+git push --force -u origin main
 ```
-Expected: repo created, `main` pushed.
+Expected: remote `main` now contains only our project; previous contents replaced.
 
 - [ ] **Step 3: Deploy to Vercel** — import the GitHub repo in Vercel (framework preset auto-detects **Astro**; build `astro build`, output `dist/`). Alternatively use the Vercel MCP `deploy_to_vercel` tool against the connected repo. Confirm the production URL renders identically to Task 8.
 
