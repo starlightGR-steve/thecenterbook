@@ -140,6 +140,7 @@ body{font-family:var(--font-primary);font-weight:500;color:var(--text);line-heig
 .footer-bottom{max-width:var(--max);margin:2rem auto 0;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,.08);display:flex;justify-content:space-between;font-size:.68rem}
 
 /* RESPONSIVE */
+.fw3-stats,.fw3-cols{grid-template-columns:repeat(3,1fr)}
 @media(max-width:900px){
   .feature-split{grid-template-columns:1fr;gap:2rem}.feature-split.reverse .feat-text{order:1}.feature-split.reverse .feat-visual{order:2}
   .who-cards,.founding-benefits{grid-template-columns:1fr}.included-visual{grid-template-columns:1fr}
