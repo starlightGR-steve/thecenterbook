@@ -178,6 +178,9 @@ body{font-family:var(--font-primary);font-weight:500;color:var(--text);line-heig
 .modal .req{color:var(--accent-text)}
 .modal-submit{width:100%;margin-top:1.4rem;padding:.9rem;background:var(--accent);color:#fff;border:none;border-radius:8px;font-weight:700;font-size:.95rem;cursor:pointer;font-family:var(--font-primary)}
 .modal-submit:hover{background:var(--accent-dark)}
+.modal-submit:disabled{opacity:.65;cursor:default}
+.modal-err{margin-top:1rem;font-size:.85rem;line-height:1.5;color:var(--accent-text)}
+.modal-err a{color:inherit;font-weight:700}
 .modal-success{text-align:center;padding:.5rem 0}
 .modal-success .ok{width:56px;height:56px;border-radius:50%;background:var(--secondary-ultra-light);color:var(--secondary-text);display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-size:1.7rem}
 .field-err{border-color:var(--accent)!important}

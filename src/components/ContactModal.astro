@@ -15,7 +15,9 @@
       <input type="tel" id="f_phone" autocomplete="tel">
       <label>Message</label>
       <textarea id="f_message" placeholder="Anything you'd like us to know?"></textarea>
-      <button class="modal-submit" onclick="submitCTA()">Send</button>
+      <input type="text" id="f_company" name="company" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
+      <p id="ctaErr" class="modal-err" style="display:none" role="alert"></p>
+      <button class="modal-submit" id="ctaSubmit" onclick="submitCTA()">Send</button>
     </div>
     <div id="ctaDone" class="modal-success" style="display:none">
       <div class="ok">&#10003;</div>
