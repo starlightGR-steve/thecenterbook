@@ -1,10 +1,10 @@
-import { Resend } from 'resend';
+import sgMail from '@sendgrid/mail';
 
 /* Where the notification lands. Overridable per-environment without a code change. */
 const TO = process.env.CONTACT_TO || 'bincysines@gmail.com';
-/* Must be an address on a domain verified in Resend. The resend.dev sender only
-   delivers to the Resend account owner, so set CONTACT_FROM once a domain is verified. */
-const FROM = process.env.CONTACT_FROM || 'The Center Book <onboarding@resend.dev>';
+/* Must match a Single Sender or authenticated domain in SendGrid, or the API
+   returns 403. Set CONTACT_FROM to whatever the app already sends from. */
+const FROM = process.env.CONTACT_FROM || 'The Center Book <noreply@thecenterbook.com>';
 
 const EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 const MAX = 5000;
@@ -27,9 +27,9 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed.' });
   }
 
-  const key = process.env.RESEND_API_KEY;
+  const key = process.env.SENDGRID_API_KEY;
   if (!key) {
-    console.error('contact: RESEND_API_KEY is not set');
+    console.error('contact: SENDGRID_API_KEY is not set');
     return res.status(500).json({ error: 'Email is not configured.' });
   }
 
@@ -82,20 +82,18 @@ export default async function handler(req, res) {
   const text = `${topic}\n\n${rows.map(([k, v]) => `${k}: ${v}`).join('\n')}`;
 
   try {
-    const { error } = await new Resend(key).emails.send({
-      from: FROM,
+    sgMail.setApiKey(key);
+    await sgMail.send({
       to: TO,
+      from: FROM,
       replyTo: email,
       subject: `${topic} — ${center}`,
       html,
       text,
     });
-    if (error) {
-      console.error('contact: resend rejected the send', error);
-      return res.status(502).json({ error: 'Could not send right now.' });
-    }
   } catch (err) {
-    console.error('contact: send threw', err);
+    /* SendGrid puts the useful detail in response.body.errors, not the message. */
+    console.error('contact: sendgrid send failed', err?.response?.body || err);
     return res.status(502).json({ error: 'Could not send right now.' });
   }
 
