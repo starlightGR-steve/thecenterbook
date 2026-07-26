@@ -181,6 +181,9 @@ body{font-family:var(--font-primary);font-weight:500;color:var(--text);line-heig
 .modal-success{text-align:center;padding:.5rem 0}
 .modal-success .ok{width:56px;height:56px;border-radius:50%;background:var(--secondary-ultra-light);color:var(--secondary-text);display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-size:1.7rem}
 .field-err{border-color:var(--accent)!important}
+.modal .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.modal-error{margin-top:1rem;padding:.7rem .8rem;border-radius:8px;background:var(--accent-ultra-light,#fdeeee);color:var(--accent-text);font-size:.82rem;line-height:1.5}
+.modal-submit[disabled]{opacity:.6;cursor:default}
 
 /* from original line 216 */
 @keyframes pd{0%,100%{opacity:1}50%{opacity:.5}}
