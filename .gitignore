@@ -5,3 +5,7 @@ dist/
 .vercel/
 *.log
 .superpowers/
+
+# Design source mockups. Large single-file HTML with base64-embedded images;
+# extracted into public/images/ rather than committed.
+design-reference/

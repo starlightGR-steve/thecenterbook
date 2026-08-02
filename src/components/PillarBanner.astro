@@ -1,0 +1,26 @@
+---
+// One of the four angled pillar headers. The banner is skewed and the inner
+// wrapper counter-skews so the content sits level. Colors come from the
+// .pillar-banner--<tone> modifiers in global.css.
+interface Props {
+  tone: 'growth' | 'retention' | 'operations' | 'automations';
+  index: number;
+  title: string;
+  lede: string;
+}
+const { tone, index, title, lede } = Astro.props;
+---
+<section class="section pillar-band">
+  <div class={`pillar-banner pillar-banner--${tone}`}>
+    <div class="pillar-banner-inner">
+      <div class="section-inner">
+        <div class="pillar-icon">
+          <slot name="icon" />
+        </div>
+        <div class="pillar-kicker">Pillar {index} of 4</div>
+        <h2 class="pillar-title">{title}</h2>
+        <p class="pillar-lede">{lede}</p>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,85 @@
+---
+const groups = [
+  {
+    title: 'Runs on a schedule',
+    sub: 'No human involved',
+    icon: 'clock',
+    items: [
+      'Progress-meeting outreach sweep (invite, nudge, follow-up, reminder)',
+      'Birthday card task to a chosen staff member, plus a birthday badge on the Live Class card at check-in',
+      'Annual grade increase, fully reversible',
+    ],
+  },
+  {
+    title: 'Fires on an event',
+    sub: 'The moment it happens',
+    icon: 'zap',
+    items: [
+      '5-minute pickup text, armed at check-in',
+      'Auto level-up when a test is passed',
+      'ASHR tier auto-classification',
+      'Branded level-up celebration email',
+      'Portal invite when a lead is enrolled',
+    ],
+  },
+  {
+    title: 'One click by staff',
+    sub: 'A person decides, the system does the rest',
+    icon: 'wand',
+    items: [
+      'We-missed-you text on a no-show',
+      'Pickup touchpoint text',
+      'Bathroom-request permission text',
+    ],
+  },
+];
+---
+<section class="section bg-blue">
+  <div class="dots" aria-hidden="true" style="width:100px;height:100px;bottom:30px;right:40px"></div>
+  <div class="section-inner centered">
+    <span class="eyebrow" style="color:#256d8c">Automation</span>
+    <span class="script script-xl" style="color:#256d8c;display:block">Set It and Forget It</span>
+    <h2 class="headline">The little things happen on their own.</h2>
+    <div class="curve"></div>
+    <p class="subhead" style="max-width:640px;margin-left:auto;margin-right:auto">Dozens of jobs run in the background so no one has to remember them. Here is what runs on a schedule, what fires the moment something happens, and what your staff triggers with a single click.</p>
+  </div>
+  <div class="section-inner" style="margin-top:1.6rem">
+    <div class="card-grid">
+      {groups.map((g) => (
+        <div class="info-card">
+          <div class="info-card-head">
+            <div class="info-card-icon info-card-icon--mixed">
+              {g.icon === 'clock' && (
+                <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              )}
+              {g.icon === 'zap' && (
+                <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+              )}
+              {g.icon === 'wand' && (
+                <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 9l5 12 1.8-5.2L21 14 9 9z"/><path d="M7.2 2.2 8 5.1"/><path d="m5.1 8-2.9-.8"/><path d="M14 4.1 12 6"/><path d="m6 12-1.9 2"/></svg>
+              )}
+            </div>
+            <div>
+              <div class="info-card-title">{g.title}</div>
+              <div class="info-card-sub">{g.sub}</div>
+            </div>
+          </div>
+          <ul class="tick-list">
+            {g.items.map((item) => (
+              <li>
+                <svg class="tick-icon" aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#4a9ac2" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </div>
+  <div class="section-inner" style="max-width:960px;margin-top:2rem">
+    <div class="shot"><img loading="lazy" decoding="async" width="1876" height="1083" src="/images/automated-tasks.webp" alt="Staff automated tasks settings"></div>
+    <div class="centered" style="margin-top:1.8rem">
+      <a href="#" class="btn btn-founding" data-cta="See It Live">See It Live</a>
+    </div>
+  </div>
+</section>

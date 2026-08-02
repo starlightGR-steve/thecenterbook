@@ -1,0 +1,136 @@
+---
+const columns = [
+  {
+    key: 'operations',
+    label: 'Operations',
+    titleTone: 'info-card-title--teal',
+    iconTone: 'info-card-icon--teal',
+    iconShadow: '0 5px 14px #00798540',
+    tick: '#007985',
+    items: [
+      'Staff-operated barcode check-in',
+      'Live classroom + row assignments',
+      'Attendance kanban + reconciliation',
+      'Public lobby board (TV display)',
+      'Installable tablet app (PWA)',
+      'Real-time multi-tablet sync',
+      'Library circulation',
+      'Student learning apps',
+    ],
+  },
+  {
+    key: 'communication',
+    label: 'Communication',
+    titleTone: 'info-card-title--warm',
+    iconTone: 'info-card-icon--warm',
+    iconShadow: '0 5px 14px #b85a1a40',
+    tick: '#b85a1a',
+    items: [
+      'Automated pickup SMS + reminders',
+      'Two-way SMS inbox',
+      'Level-up celebration emails',
+      'Progress meeting workflow',
+      'Notifications + alert routing',
+      'Parent portal + email campaigns',
+    ],
+  },
+  {
+    key: 'students',
+    label: 'Students + Data',
+    titleTone: 'info-card-title--blue',
+    iconTone: 'info-card-icon--blue',
+    iconShadow: '0 5px 14px #355caa40',
+    tick: '#355caa',
+    items: [
+      'Multi-to-multi contact management',
+      'Student journal + goals',
+      'Curriculum + level tracking',
+      'Placement testing + insights dashboard',
+      'Lead pipeline + enrollment CRM',
+      'Public lead forms',
+      'Onboarding automation',
+      'Task management + inbox',
+    ],
+  },
+  {
+    key: 'platform',
+    label: 'Platform + Admin',
+    titleTone: 'info-card-title--mixed',
+    iconTone: 'info-card-icon--mixed',
+    iconShadow: '0 5px 14px #4a9ac240',
+    tick: '#4a9ac2',
+    items: [
+      'Center website + funnel',
+      'Student + staff scheduling',
+      'Staff timeclock + hour export',
+      'Booking calendar',
+      'Staff "Me" dashboard',
+      'Roles + permission matrix',
+      'White-label + center settings',
+      'Dedicated database per center',
+      'Holiday + closed-date management',
+    ],
+  },
+];
+---
+<section class="section bg-white">
+  <div class="section-inner centered">
+    <span class="script script-hero" style="color:var(--primary)">Everything. Included.</span>
+    <h2 class="headline">The complete platform. All built. All yours.</h2>
+    <div class="curve"></div>
+    <p class="subhead" style="margin-bottom:3rem">One subscription replaces your website builder, forms, CRM, email service, SMS tool, parent portal, booking tool, and ops software. One database, one system, your entire center. Here's everything you get:</p>
+  </div>
+  <div class="section-inner">
+    <div class="stat-tiles">
+      <div class="stat-tile stat-tile--teal">
+        <div class="stat-tile-num">36+</div>
+        <div class="stat-tile-label">Built-in Features</div>
+        <div class="stat-tile-note">Not integrations. Built into one platform.</div>
+      </div>
+      <div class="stat-tile stat-tile--warm">
+        <div class="stat-tile-num">1</div>
+        <div class="stat-tile-label">Dedicated Database</div>
+        <div class="stat-tile-note">Your data. Your center. Complete isolation.</div>
+      </div>
+      <div class="stat-tile stat-tile--blue">
+        <div class="stat-tile-num">0</div>
+        <div class="stat-tile-label">Other Tools Needed</div>
+        <div class="stat-tile-note">No duct tape. No third-party apps.</div>
+      </div>
+    </div>
+    <div class="card-grid tight">
+      {columns.map((col) => (
+        <div class="info-card shadow-lg">
+          <div class="info-card-head ruled">
+            <div class={`info-card-icon ${col.iconTone}`} style={`box-shadow:${col.iconShadow}`}>
+              {col.key === 'operations' && (
+                <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>
+              )}
+              {col.key === 'communication' && (
+                <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+              )}
+              {col.key === 'students' && (
+                <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              )}
+              {col.key === 'platform' && (
+                <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="21" x2="14" y1="4" y2="4"/><line x1="10" x2="3" y1="4" y2="4"/><line x1="21" x2="12" y1="12" y2="12"/><line x1="8" x2="3" y1="12" y2="12"/><line x1="21" x2="16" y1="20" y2="20"/><line x1="12" x2="3" y1="20" y2="20"/><line x1="14" x2="14" y1="2" y2="6"/><line x1="8" x2="8" y1="10" y2="14"/><line x1="16" x2="16" y1="18" y2="22"/></svg>
+              )}
+            </div>
+            <div class={`info-card-title lg ${col.titleTone}`}>{col.label}</div>
+          </div>
+          <div class="tick-rows">
+            {col.items.map((item) => (
+              <div class="tick-row">
+                <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke={col.tick} stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+                <span>{item}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+    <div class="centered" style="margin-top:2.5rem">
+      <a href="#" class="btn btn-founding btn-full" data-cta="Get Started">Get Started</a>
+    </div>
+  </div>
+</section>

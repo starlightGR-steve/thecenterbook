@@ -1,0 +1,81 @@
+---
+// The four-up overview grid. Card chrome and tone colors live in global.css
+// (.pillar-card / .pillar-card--<tone>); SVG stroke colors stay literal because
+// presentation attributes cannot read CSS custom properties.
+const pillars = [
+  {
+    tone: 'growth',
+    kicker: 'Pillar 1',
+    title: 'Growth',
+    blurb: 'Get found locally through a full funnel site on your own domain, with every inquiry landing in your pipeline.',
+    tick: '#009aab',
+    items: ['Funnel site on your domain', 'Local SEO', 'Lead pipeline and CRM', 'Nurture email', 'Public lead forms'],
+  },
+  {
+    tone: 'retention',
+    kicker: 'Pillar 2',
+    title: 'Retention',
+    blurb: 'Keep families enrolled, engaged, and progressing, and see the whole picture as an owner.',
+    tick: '#E0712C',
+    items: ['Live Class session tracking', 'Parent text alerts', 'Portal dashboard and center pages', 'Progress meetings and level-ups', 'Business insights dashboard'],
+  },
+  {
+    tone: 'operations',
+    kicker: 'Pillar 3',
+    title: 'Operations',
+    blurb: 'Run the daily engine in real time, from check-in to the classroom floor.',
+    tick: '#355caa',
+    items: ['Barcode check-in', 'Attendance kanban', 'Scheduling and timeclock', 'Student records', 'Lobby board'],
+  },
+  {
+    tone: 'automations',
+    kicker: 'Pillar 4',
+    title: 'Automations',
+    blurb: 'Get hours back. The little things run themselves in the background.',
+    tick: '#4a9ac2',
+    items: ['Pickup and touchpoint SMS', 'Auto level-ups', 'Meeting prep and follow-up', 'Annual grade increase', 'Task routing'],
+  },
+];
+---
+<section class="section bg-white" style="position:relative;overflow:hidden">
+  <div class="blob" aria-hidden="true" style="width:420px;height:420px;top:-130px;right:-110px;background:radial-gradient(circle,rgba(0,171,189,.09),transparent 65%)"></div>
+  <div class="blob" aria-hidden="true" style="width:340px;height:340px;bottom:-120px;left:-100px;background:radial-gradient(circle,rgba(224,113,44,.06),transparent 65%)"></div>
+  <div class="section-inner centered" style="position:relative;z-index:1">
+    <span class="eyebrow" style="color:var(--secondary-text)">The whole center, not just the front desk</span>
+    <h2 class="headline" style="max-width:900px;margin:0 auto">Most software runs your front desk. The Center Book runs all four parts of your center.</h2>
+    <div class="curve"></div>
+    <div class="pillar-cards">
+      {pillars.map((p) => (
+        <div class={`pillar-card pillar-card--${p.tone}`}>
+          <div class="pillar-card-rule" aria-hidden="true"></div>
+          <div class="pillar-card-icon">
+            {p.tone === 'growth' && (
+              <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+            )}
+            {p.tone === 'retention' && (
+              <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+            )}
+            {p.tone === 'operations' && (
+              <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>
+            )}
+            {p.tone === 'automations' && (
+              <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            )}
+          </div>
+          <div class="pillar-card-kicker">{p.kicker}</div>
+          <h3>{p.title}</h3>
+          <p>{p.blurb}</p>
+          <ul>
+            {p.items.map((item) => (
+              <li>
+                <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke={p.tick} stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+    <p class="subhead" style="margin:2.2rem auto 0;max-width:780px;text-align:center">Most tools cover Operations. The Center Book is built for all four, and the automation layer, the part that quietly runs your center in the background, is where other tools stop.</p>
+  </div>
+</section>

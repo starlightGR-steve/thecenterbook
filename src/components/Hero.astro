@@ -1,21 +1,31 @@
-<section class="section" style="background:linear-gradient(170deg,var(--white) 0%,var(--secondary-ultra-light) 35%,var(--primary-ultra-light) 65%,var(--secondary-ultra-light) 100%)">
-  <div class="blob" style="width:500px;height:500px;top:-100px;right:-100px;background:radial-gradient(circle,rgba(0,171,189,.07),transparent 60%)"></div>
-  <div class="blob" style="width:400px;height:400px;bottom:-80px;left:-80px;background:radial-gradient(circle,rgba(224,113,44,.05),transparent 60%)"></div>
+---
+---
+<section class="section" style="padding-top:calc(var(--gap) + 80px);background:linear-gradient(170deg,var(--white) 0%,var(--secondary-ultra-light) 35%,var(--primary-ultra-light) 65%,var(--secondary-ultra-light) 100%)">
+  <div class="blob" aria-hidden="true" style="width:500px;height:500px;top:-100px;right:-100px;background:radial-gradient(circle,rgba(0,171,189,.07),transparent 60%)"></div>
+  <div class="blob" aria-hidden="true" style="width:400px;height:400px;bottom:-80px;left:-80px;background:radial-gradient(circle,rgba(224,113,44,.05),transparent 60%)"></div>
   <div class="section-inner">
     <div class="feature-split">
       <div class="feat-text">
+        <span class="eyebrow" style="color:var(--secondary-text)">Built for Kumon center owners</span>
         <span class="script script-hero" style="color:var(--accent)">Get Back to What Matters</span>
         <h1 class="headline" style="font-size:clamp(2rem,4vw,3rem)">You opened your center <span style="color:var(--secondary-text)">to change kids' lives.</span><br>Not to drown in busy work.</h1>
-        <p class="subhead">Paper sign-in sheets, texting parents from your personal phone, student data scattered across five different apps, no real-time view of your classroom. It all pulled you away from the reason you started. The Center Book handles center operations so your staff gets back to what matters most: the students.</p>
-        <div style="display:flex;gap:1rem;flex-wrap:wrap"><a href="#" class="btn btn-founding" data-cta="Become a Founding Center">Become a Founding Center</a><a href="#" class="btn btn-demo" data-cta="Book a Demo">Book a Demo</a></div>
+        <p class="subhead">Attendance is the easy part. The Center Book runs everything else: it brings new families in and keeps the ones you have coming back, gives your teachers a live view of every student and their progress on the floor, turns your center's numbers into business insights you can act on, and automates the busywork so it runs itself. One system that works alongside K-SIS and Kumon Connect, so your team gets back to what matters most: the students.</p>
+        <div style="display:flex;gap:1rem;flex-wrap:wrap">
+          <a href="#" class="btn btn-founding" data-cta="Get Started">Get Started</a>
+          <a href="#" class="btn btn-demo" data-cta="Book a Demo">Book a Demo</a>
+        </div>
       </div>
       <div class="feat-visual">
-        <div class="blob" style="background:linear-gradient(135deg,rgba(53,92,170,.06),rgba(0,171,189,.06));width:120%;height:120%;top:-10%;left:-10%"></div>
-        <div class="shot"><img src="/images/img-01.png" alt="The Center Book attendance board"></div>
-        <div class="float-el" style="bottom:24px;left:-20px;border-left:3px solid var(--secondary-text)"><i data-lucide="send" style="width:16px;height:16px;color:var(--secondary-text)"></i> <span><strong style="color:var(--primary)">Text sent to parent</strong><br>"Ariella is ready for pickup."</span></div>
+        <div class="blob" aria-hidden="true" style="background:linear-gradient(135deg,rgba(53,92,170,.06),rgba(0,171,189,.06));width:120%;height:120%;top:-10%;left:-10%"></div>
+        <div class="ipad-wrap">
+          <div class="ipad-frame"><img fetchpriority="high" loading="eager" decoding="async" width="1300" height="1003" src="/images/attendance-board.webp" alt="The Center Book attendance board"></div>
+          <div class="ipad-frame ipad-reflection" aria-hidden="true"><img fetchpriority="high" loading="eager" decoding="async" width="1300" height="1003" src="/images/attendance-board.webp" alt="The Center Book attendance board"></div>
+        </div>
+        <div class="float-el" style="bottom:24px;left:-20px;border-left:3px solid var(--secondary-text)">
+          <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#007985" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+          <span><strong style="color:var(--primary)">Text sent to parent</strong><br>"Ariella is ready for pickup."</span>
+        </div>
       </div>
     </div>
   </div>
 </section>
-
-<!-- SOCIAL PROOF -->

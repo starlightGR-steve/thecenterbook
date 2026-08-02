@@ -1,1 +1,23 @@
-<nav class="nav" id="nav"><div class="nav-inner"><a href="#" class="nav-logo"><img src="/images/logo-horiz.png" alt="The Center Book" id="nav-logo"></a><ul class="nav-links"><li><a href="#" class="nav-cta" data-cta="Book a Demo">Book a Demo</a></li></ul></div></nav>
+---
+// Logo stays the branded PNG rather than v59's inline SVG: that SVG drops the
+// "e" in "the", which was fixed on main in b5ecb48.
+---
+<a href="#main-content" class="skip-link">Skip to content</a>
+<header role="banner">
+  <nav class="nav" id="nav" aria-label="Primary">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">
+        <!-- Full lockup is ~217px wide at 48px tall; below ~520px it cannot sit
+             beside the Book a Demo pill, so the compact CB mark takes over.
+             Only one is ever displayed, so there is no duplicate accessible name. -->
+        <img class="nav-logo-full" loading="eager" decoding="async" width="7601" height="1682" src="/images/logo-horiz.webp" alt="The Center Book" id="nav-logo">
+        <img class="nav-logo-mark" loading="eager" decoding="async" width="206" height="256" src="/images/logo-mark.webp" alt="The Center Book">
+      </a>
+      <ul class="nav-links">
+        <!-- nav-item-cta stays visible at every width; any future <li> without
+             that class is hidden on small screens by the ≤900px media query. -->
+        <li class="nav-item-cta"><a href="#" class="nav-cta" data-cta="Book a Demo">Book a Demo</a></li>
+      </ul>
+    </div>
+  </nav>
+</header>

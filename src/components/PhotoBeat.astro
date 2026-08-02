@@ -1,0 +1,23 @@
+---
+// The angled photo that overlaps up into the pillar banner above it.
+// objectPosition varies per beat, so it stays inline; the clip path, aspect
+// ratio and scrim live in global.css.
+interface Props {
+  src: string;
+  alt: string;
+  objectPosition?: string;
+  caption: string;
+}
+const { src, alt, objectPosition = 'center', caption } = Astro.props;
+---
+<section class="section beat-section">
+  <div class="section-inner">
+    <div class="photo-beat">
+      <div class="photo-beat-clip">
+        <img class="photo-beat-img" src={src} alt={alt} style={`object-position:${objectPosition}`}>
+        <div class="photo-beat-scrim" aria-hidden="true"></div>
+        <div class="photo-beat-caption"><span>{caption}</span></div>
+      </div>
+    </div>
+  </div>
+</section>

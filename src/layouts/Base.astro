@@ -6,14 +6,54 @@ import '../styles/global.css';
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Center Book - Built for Tutoring Centers</title>
+<title>The Center Book | Software for Kumon &amp; Tutoring Center Owners</title>
+<meta name="description" content="All-in-one software for Kumon and tutoring center owners: attendance, live-class tracking, a parent portal, a lead-capturing funnel site, and automations that run your center. Works alongside K-SIS. Book a demo.">
+<meta name="keywords" content="tutoring center software, Kumon center management software, learning center software, attendance software for tutoring centers, parent portal software, tutoring center CRM, center management platform">
+<meta name="robots" content="index, follow">
+<meta name="author" content="The Center Book LLC">
+<meta name="theme-color" content="#355caa">
+<link rel="canonical" href="https://www.thecenterbook.com/">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="512x512" href="/favicon-512.png">
+<link rel="apple-touch-icon" href="/favicon-180.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="The Center Book">
+<meta property="og:title" content="The Center Book | Software for Kumon &amp; Tutoring Center Owners">
+<meta property="og:description" content="One system to run your whole center: attendance, live class, parent portal, funnel site, and automations. Built for Kumon and tutoring center owners.">
+<meta property="og:url" content="https://www.thecenterbook.com/">
+<meta property="og:image" content="https://www.thecenterbook.com/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The Center Book | Software for Kumon &amp; Tutoring Center Owners">
+<meta name="twitter:description" content="One system to run your whole center: attendance, live class, parent portal, funnel site, and automations.">
+<meta name="twitter:image" content="https://www.thecenterbook.com/og-image.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Oooh+Baby&display=swap" rel="stylesheet">
+<script type="application/ld+json" is:inline set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://www.thecenterbook.com/#org",
+      "name": "The Center Book",
+      "url": "https://www.thecenterbook.com/",
+      "description": "All-in-one management software for Kumon and tutoring center owners."
+    },
+    {
+      "@type": "SoftwareApplication",
+      "name": "The Center Book",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Web-based",
+      "description": "Software that runs a tutoring center end to end: a funnel website, lead pipeline, attendance and live-class tracking, a parent portal, business insights, and automations. Works alongside K-SIS.",
+      "provider": { "@id": "https://www.thecenterbook.com/#org" },
+      "audience": { "@type": "Audience", "audienceType": "Kumon and tutoring center owners" }
+    }
+  ]
+})}></script>
 </head>
 <body>
 <slot />
 
-<script is:inline src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
-<script is:inline>lucide.createIcons();</script>
 <script is:inline>
 const nav=document.getElementById('nav');window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>20)});
 const obs=new IntersectionObserver(e=>{e.forEach(el=>{if(el.isIntersecting){el.target.style.opacity='1';el.target.style.transform='translateY(0)'}});},{threshold:.06,rootMargin:'0px 0px -40px 0px'});
