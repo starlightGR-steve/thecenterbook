@@ -29,18 +29,27 @@ body{font-family:var(--font-primary);font-weight:500;color:var(--text);line-heig
 .curve-left{margin-left:0}
 
 /* BUTTONS - two types: founding (primary) and demo (secondary) */
-/* 1.25rem keeps button text at or above the 18.66px WCAG large-text floor across
-   the whole root range (18.75px at 15px root, 20px at 16px, 22.5px at 18px), so
-   the brand orange passes AA at the 3:1 large-text threshold without darkening. */
-.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.9rem 2.2rem;border-radius:6px;font-weight:700;font-size:1.25rem;text-decoration:none;transition:all .25s;justify-content:center;border:2.5px solid transparent}
+/* Shared shell for every button, filled or outlined: geometry and type only, no
+   colour. font-size 1.25rem keeps button text at or above the 18.66px WCAG
+   large-text floor across the whole root range (18.75px at a 15px root, 20px at
+   16px, 22.5px at 18px). cursor/font-family are here so <button> elements match
+   anchors without needing their own rule. */
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.9rem 2.2rem;border-radius:6px;font-weight:700;font-size:1.25rem;text-decoration:none;transition:all .25s;justify-content:center;border:2.5px solid transparent;cursor:pointer;font-family:var(--font-primary)}
+
+/* ===== THE filled orange CTA - the only place the orange fill is defined =====
+   Every filled orange button on the page (hero, sections, footer, nav pill,
+   contact modal) is `.btn .btn-founding`. Do not restate this fill anywhere
+   else; add a colour-free layout modifier instead. Large text at 1.25rem/700
+   lets #ce621e clear WCAG AA at the 3:1 threshold. */
 .btn-founding{background:var(--accent-btn);color:#fff;border-color:var(--accent-btn)}
-/* v59 declares .btn-founding:hover twice. The second wins, so the rendered hover
-   is --accent-dark. Both are kept so the cascade matches the mockup exactly. */
-.btn-founding:hover{background:var(--accent-text);border-color:var(--accent-text)}
 .btn-founding:hover{background:var(--accent-dark);border-color:var(--accent-dark);transform:translateY(-2px);box-shadow:0 6px 20px rgba(224,113,44,.25)}
+
+/* Outlined / secondary styles - separate on purpose, not part of the above. */
 .btn-demo{background:transparent;color:var(--primary);border-color:var(--primary)}.btn-demo:hover{background:var(--primary);color:#fff;transform:translateY(-2px)}
 .btn-white{background:#fff;color:var(--primary);border-color:#fff}.btn-white:hover{background:transparent;color:#fff;transform:translateY(-2px)}
-.btn-full{width:100%;max-width:480px;margin:0 auto;display:flex;padding:1.1rem 2rem;font-size:1.25rem;border-radius:8px}
+
+/* Layout-only modifiers. These carry no colour, so they cannot drift. */
+.btn-full{width:100%;max-width:480px;margin:0 auto;display:flex}
 /* Outlined-on-dark variant used in the founding section */
 .btn-ghost-light{border-color:rgba(255,255,255,.3);color:#fff}
 
@@ -55,12 +64,11 @@ body{font-family:var(--font-primary);font-weight:500;color:var(--text);line-heig
    display:block and would otherwise force both logos to render at once. */
 .nav-logo .nav-logo-mark{display:none}
 .nav-links{display:flex;align-items:center;gap:2rem;list-style:none}
-.nav-links a{text-decoration:none;color:var(--text);font-weight:500;font-size:.85rem}.nav-links a:hover{color:var(--secondary-text)}
-/* Selector is .nav-links a.nav-cta so it outranks `.nav-links a` (0,1,1), which
-   otherwise pins the size at .85rem. At 1.25rem/700 the pill is large text, so
-   the brand orange clears AA at 3:1; padding scales with it to keep the tap
-   target comfortable, and line-height caps the pill height. */
-.nav-links a.nav-cta{background:var(--accent-btn);color:#fff!important;padding:.75rem 1.5rem;border-radius:6px;font-weight:700!important;font-size:1.25rem;line-height:1.2;white-space:nowrap}
+/* :not(.btn) so this generic link rule (0,1,1) cannot out-specify `.btn`
+   (0,1,0). Without it the nav pill needed its own duplicate paint rule, which
+   is exactly how the oranges drifted apart. */
+.nav-links a:not(.btn){text-decoration:none;color:var(--text);font-weight:500;font-size:.85rem}.nav-links a:not(.btn):hover{color:var(--secondary-text)}
+.nav-links .btn{white-space:nowrap}
 
 /* DECORATIVE */
 .blob{position:absolute;border-radius:50%;pointer-events:none;z-index:0}
@@ -96,6 +104,13 @@ body{font-family:var(--font-primary);font-weight:500;color:var(--text);line-heig
 /* PILLAR BANNERS - the four angled headers (Growth / Retention / Operations /
    Automations). v59 carried these as inline styles; lifted here so tokens drive
    the colors. The inner counter-skew keeps the text level. */
+/* One continuous tinted backdrop behind a banner + its photo beat. Both sit on
+   this single element, so there is no seam between them and no white anywhere
+   behind the angled edges. display:flow-root contains the banner's 2rem margins,
+   which previously collapsed out of .pillar-band (padding:0) and showed as white
+   gaps between sections. Geometry is unchanged - the margins, the skew and the
+   -95px overlap all keep their existing values. */
+.pillar-zone{display:flow-root}
 .pillar-band{padding:0;overflow:visible;background:transparent}
 .pillar-banner{position:relative;transform:skewY(-2.5deg);margin:2rem 0}
 .pillar-banner-inner{transform:skewY(2.5deg);padding:3.6rem 1.5rem;text-align:center}
@@ -276,10 +291,9 @@ body{font-family:var(--font-primary);font-weight:500;color:var(--text);line-heig
 .footer-inner{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:2fr 1fr;align-items:center;gap:2rem}
 .footer-brand p{font-size:.75rem;line-height:1.6;margin-top:.8rem;max-width:280px}.footer-brand svg{height:30px;width:auto;margin-bottom:.5rem}
 .footer h4{color:#fff;font-size:.78rem;font-weight:600;margin-bottom:1rem}
-.footer ul{list-style:none}.footer li{margin-bottom:.5rem}.footer a{color:rgba(255,255,255,.6);text-decoration:none;font-size:.75rem}.footer a:hover{color:var(--secondary-light)}
-/* `.footer a` (0,1,1) outranks `.btn` (0,1,0) and would pin this CTA at .75rem,
-   dropping it under the large-text floor. This rule (0,2,0) restores it. */
-.footer .btn-founding,.footer .btn-founding:hover{color:#fff;font-size:1.25rem}
+/* :not(.btn) for the same reason as the nav: the generic footer link rule would
+   otherwise out-specify `.btn` and shrink the CTA below the large-text floor. */
+.footer ul{list-style:none}.footer li{margin-bottom:.5rem}.footer a:not(.btn){color:rgba(255,255,255,.6);text-decoration:none;font-size:.75rem}.footer a:not(.btn):hover{color:var(--secondary-light)}
 .footer-bottom{max-width:var(--max);margin:2rem auto 0;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,.08);display:flex;justify-content:space-between;font-size:.68rem}
 
 /* RESPONSIVE */
@@ -305,10 +319,10 @@ body{font-family:var(--font-primary);font-weight:500;color:var(--text);line-heig
   .nav-logo .nav-logo-mark{display:block}
 }
 @media(max-width:400px){
-  /* Tighten the pill on the narrowest phones. Font stays 1.25rem so it remains
-     large text and the orange keeps passing AA at 3:1. */
+  /* Tighten the header on the narrowest phones. Padding only - the shared
+     .btn/.btn-founding fill, type size and shape are untouched. */
   .nav-inner{padding:.8rem 1rem}
-  .nav-links a.nav-cta{padding:.7rem 1.05rem}
+  .nav-links .btn{padding:.75rem 1.1rem}
   /* The lead testimonial sits text beside the portrait on desktop via a 280px
      floor. On narrow screens that floor forced the page's minimum layout width
      (shrink-to-fit), and merely zeroing it squeezed the quote into a ~100px
@@ -351,8 +365,9 @@ body{font-family:var(--font-primary);font-weight:500;color:var(--text);line-heig
 .modal input:focus,.modal textarea:focus{outline:none;border-color:var(--secondary)}
 .modal textarea{min-height:88px;resize:vertical}
 .modal .req{color:var(--accent-text)}
-.modal-submit{width:100%;margin-top:1.4rem;padding:.9rem;background:var(--accent);color:#fff;border:none;border-radius:8px;font-weight:700;font-size:.95rem;cursor:pointer;font-family:var(--font-primary)}
-.modal-submit:hover{background:var(--accent-dark)}
+/* Layout only. The modal's Send/Close buttons are `.btn .btn-founding .btn-full`
+   like every other filled orange CTA; this just spaces them within the modal. */
+.modal-submit{margin-top:1.4rem}
 .modal-success{text-align:center;padding:.5rem 0}
 .modal-success .ok{width:56px;height:56px;border-radius:50%;background:var(--secondary-ultra-light);color:var(--secondary-text);display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-size:1.7rem}
 .field-err{border-color:var(--accent)!important}

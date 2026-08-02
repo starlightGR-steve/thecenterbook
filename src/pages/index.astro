@@ -40,36 +40,44 @@ import ContactModal from '../components/ContactModal.astro';
     <FourPillars />
     <DoneForYou />
 
-    <PillarBanner tone="growth" index={1} title="Growth" lede="Fill your center. Turn the families already searching into enrolled students.">
-      <svg slot="icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
-    </PillarBanner>
-    <PhotoBeat src="/images/beat-family-outdoors.webp" alt="A family playing together outdoors" objectPosition="center" caption="It starts with a family looking for the right fit." />
+    <div class="pillar-zone bg-cool">
+      <PillarBanner tone="growth" index={1} title="Growth" lede="Fill your center. Turn the families already searching into enrolled students.">
+        <svg slot="icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+      </PillarBanner>
+      <PhotoBeat src="/images/beat-family-outdoors.webp" alt="A family playing together outdoors" objectPosition="center" caption="It starts with a family looking for the right fit." />
+    </div>
     <FunnelSite />
     <Pipeline />
     <TestiAmy />
 
-    <PillarBanner tone="retention" index={2} title="Retention" lede="Keep your center full. Every student seen, every family engaged, every month.">
-      <svg slot="icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
-    </PillarBanner>
-    <PhotoBeat src="/images/beat-students-families.webp" alt="Students and families at a tutoring center" objectPosition="center 35%" caption="Then every student is seen, week after week." />
+    <div class="pillar-zone bg-cool">
+      <PillarBanner tone="retention" index={2} title="Retention" lede="Keep your center full. Every student seen, every family engaged, every month.">
+        <svg slot="icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+      </PillarBanner>
+      <PhotoBeat src="/images/beat-students-families.webp" alt="Students and families at a tutoring center" objectPosition="center 35%" caption="Then every student is seen, week after week." />
+    </div>
     <LiveClass />
     <FamilyHub />
     <ParentComms />
     <Curriculum />
     <BusinessInsights />
 
-    <PillarBanner tone="operations" index={3} title="Operations" lede="Run the floor on autopilot, and cover the attendance tracking Kumon requires.">
-      <svg slot="icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>
-    </PillarBanner>
-    <PhotoBeat src="/images/beat-center-running.webp" alt="Students and families at a tutoring center" objectPosition="center 35%" caption="A full center, running without the chaos." />
+    <div class="pillar-zone bg-cool">
+      <PillarBanner tone="operations" index={3} title="Operations" lede="Run the floor on autopilot, and cover the attendance tracking Kumon requires.">
+        <svg slot="icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>
+      </PillarBanner>
+      <PhotoBeat src="/images/beat-center-running.webp" alt="Students and families at a tutoring center" objectPosition="center 35%" caption="A full center, running without the chaos." />
+    </div>
     <Operations />
     <StudentManagement />
     <Scheduling />
 
-    <PillarBanner tone="automations" index={4} title="Automations" lede="Give yourself hours back. The work that used to be manual, now handled.">
-      <svg slot="icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-    </PillarBanner>
-    <PhotoBeat src="/images/beat-hours-back.webp" alt="Students and families at a tutoring center" objectPosition="center 40%" caption="So your hours go back where they belong, with the kids." />
+    <div class="pillar-zone bg-cool">
+      <PillarBanner tone="automations" index={4} title="Automations" lede="Give yourself hours back. The work that used to be manual, now handled.">
+        <svg slot="icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+      </PillarBanner>
+      <PhotoBeat src="/images/beat-hours-back.webp" alt="Students and families at a tutoring center" objectPosition="center 40%" caption="So your hours go back where they belong, with the kids." />
+    </div>
     <Automations />
 
     <TestiNicole />
