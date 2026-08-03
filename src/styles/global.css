@@ -110,7 +110,18 @@ body{font-family:var(--font-primary);font-weight:500;color:var(--text);line-heig
    which previously collapsed out of .pillar-band (padding:0) and showed as white
    gaps between sections. Geometry is unchanged - the margins, the skew and the
    -95px overlap all keep their existing values. */
-.pillar-zone{display:flow-root}
+/* The zone carries its own gradient rather than reusing .bg-cool, so its top and
+   bottom can match whatever section sits either side of it. --zone-from is the
+   colour the previous section ends on, --zone-to the colour the next one starts
+   on, which makes both joins seamless. The middle stays the soft teal tint.
+   Endpoint values: .bg-white #fff | .bg-cool #f7fbfc | .bg-blue #f5f7fb */
+.pillar-zone{display:flow-root;background:linear-gradient(180deg,var(--zone-from,#f7fbfc) 0%,var(--secondary-ultra-light) 50%,var(--zone-to,#f7fbfc) 100%)}
+.zone-from-white{--zone-from:#fff}
+.zone-from-cool{--zone-from:#f7fbfc}
+.zone-from-blue{--zone-from:#f5f7fb}
+.zone-to-white{--zone-to:#fff}
+.zone-to-cool{--zone-to:#f7fbfc}
+.zone-to-blue{--zone-to:#f5f7fb}
 .pillar-band{padding:0;overflow:visible;background:transparent}
 .pillar-banner{position:relative;transform:skewY(-2.5deg);margin:2rem 0}
 .pillar-banner-inner{transform:skewY(2.5deg);padding:3.6rem 1.5rem;text-align:center}
