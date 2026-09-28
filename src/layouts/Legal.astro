@@ -1,0 +1,51 @@
+---
+// Plain layout for the legal pages (privacy, terms). The home page's Base layout hard-codes the
+// home page's title/canonical and runs scroll scripts that expect the home page's sections.
+import '../styles/global.css';
+const { frontmatter } = Astro.props;
+const { title, description, path } = frontmatter;
+const canonical = `https://www.thecenterbook.com${path}`;
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{title} | The Center Book</title>
+<meta name="description" content={description}>
+<meta name="robots" content="index, follow">
+<meta name="author" content="The Center Book LLC">
+<meta name="theme-color" content="#355caa">
+<link rel="canonical" href={canonical}>
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="apple-touch-icon" href="/favicon-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  .legal-header{background:#fff;border-bottom:1px solid var(--primary-light);padding:1rem 1.5rem}
+  .legal-header a{display:inline-block}
+  .legal-header img{height:40px;width:auto}
+  .legal{max-width:760px;margin:0 auto;padding:2.5rem 1.5rem 4rem;font-family:var(--font-primary);color:var(--text);line-height:1.7;font-size:1rem}
+  .legal h1{color:var(--primary);font-size:clamp(1.8rem,4vw,2.4rem);line-height:1.2;margin:0 0 1rem}
+  .legal h2{color:var(--primary-dark);font-size:1.25rem;margin:2.2rem 0 .6rem}
+  .legal p,.legal ul{margin:0 0 1rem}
+  .legal ul{padding-left:1.4rem}
+  .legal li{margin-bottom:.35rem}
+  .legal a{color:var(--primary);text-decoration:underline}
+  .legal table{width:100%;border-collapse:collapse;margin:0 0 1.2rem;font-size:.92rem}
+  .legal th,.legal td{border:1px solid var(--primary-light);padding:.6rem .7rem;text-align:left;vertical-align:top}
+  .legal th{background:var(--primary-ultra-light)}
+  .legal code{font-size:.85em;background:var(--primary-ultra-light);padding:.05em .3em;border-radius:4px}
+  .legal hr{border:0;border-top:1px solid var(--primary-light);margin:1.5rem 0}
+  .legal-footer{background:#15202e;color:rgba(255,255,255,.75);font-family:var(--font-primary);font-size:.8rem;padding:1.5rem;text-align:center}
+  .legal-footer a{color:rgba(255,255,255,.85);margin:0 .6rem}
+  @media (max-width:600px){.legal table{display:block;overflow-x:auto}}
+</style>
+</head>
+<body>
+<header class="legal-header"><a href="/"><img src="/images/logo-horiz.webp" width="7601" height="1682" alt="The Center Book home"></a></header>
+<main id="main-content" class="legal"><slot /></main>
+<footer class="legal-footer">&copy; 2026 The Center Book LLC · <a href="/">Home</a><a href="/privacy">Privacy Policy</a><a href="/terms">Terms of Service</a></footer>
+</body>
+</html>
