@@ -1,0 +1,180 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import ContactModal from '../components/ContactModal.astro';
+
+const tiers = [
+  {
+    tier: 1,
+    name: 'Attendance',
+    price: 'from $35/mo',
+    tone: 'blue',
+    headline: 'Meet the mandate, run the front desk',
+    items: [
+      'Barcode check-in & check-out',
+      'Automatic pickup texts to parents',
+      'Staff timeclock & hours',
+      'No-show tracking',
+      'Billing & payments via Stripe',
+    ],
+    bestFor: 'meeting the Oct check-in mandate',
+  },
+  {
+    tier: 2,
+    name: 'Operations',
+    price: 'from $45/mo',
+    tone: 'indigo',
+    includes: 'Attendance',
+    headline: 'Run the whole floor, less busywork',
+    items: [
+      'Visual class scheduler',
+      'Staff hours & coverage',
+      'Parent portal & content pages',
+      'Online booking & self-scheduling',
+      'Library circulation',
+    ],
+    bestFor: 'taming scheduling & daily admin',
+  },
+  {
+    tier: 3,
+    name: 'Retention',
+    price: 'from $65/mo',
+    tone: 'teal',
+    includes: 'Operations',
+    featured: true,
+    headline: 'Keep families longer, teach smarter',
+    items: [
+      'Live Class: notes, flags, testing',
+      'Level tracking & milestones',
+      'Learning Apps for students',
+      'Milestone & progress emails',
+      'Progress insights & at-risk alerts',
+    ],
+    bestFor: 'raising ASHR & keeping families',
+  },
+  {
+    tier: 4,
+    name: 'Growth',
+    price: 'Custom',
+    tone: 'orange',
+    includes: 'Retention',
+    headline: 'Fill empty seats on autopilot',
+    items: [
+      'Funnel website + local SEO',
+      'Lead pipeline & CRM',
+      'Inquiry-to-enrolled in one record',
+      'Discovery assessment & onboarding',
+      'Lead-recovery email journeys',
+    ],
+    bestFor: 'centers wanting to grow',
+  },
+];
+
+const sizes = [
+  { range: '1 to 150', prices: [35, 45, 65] },
+  { range: '151 to 250', prices: [55, 75, 95] },
+  { range: '251 to 350', prices: [75, 95, 125] },
+  { range: '351+', prices: [95, 125, 175] },
+];
+---
+<Base
+  title="Pricing | The Center Book"
+  description="The Center Book pricing for Kumon and tutoring centers: four plans, from $35/month, priced by center size. Every plan includes everything before it, on one system."
+  path="/pricing"
+>
+  <Nav />
+  <main id="main-content" class="pricing-page">
+    <section class="section pricing-hero" aria-labelledby="pricing-title">
+      <div class="section-inner centered">
+        <span class="script script-xl" style="color:var(--accent-text)">Start Where You Need</span>
+        <h1 id="pricing-title" class="headline pricing-hero-title">One platform, four plans. Grow into it when you are ready.</h1>
+        <p class="subhead pricing-hero-sub">You did not get into this to decode pricing tables, so there are not any. Pick the plan that fits where your center is today, priced by your size, and move up in a click when you are ready. It all lives on one system, so there is nothing to migrate. Math and Reading count as separate subjects.</p>
+      </div>
+    </section>
+
+    <section class="section pricing-section" aria-labelledby="plans-heading">
+      <div class="section-inner">
+        <div class="plans-panel">
+          <div class="plans-head">
+            <div>
+              <span class="eyebrow" style="color:var(--secondary-text)">The Center Book · One platform, four plans</span>
+              <h2 id="plans-heading" class="plans-title">Pick where you start. Add more when you’re ready.</h2>
+            </div>
+            <p class="plans-intro">Every plan includes everything before it, on one system. Upgrade in a click, no migration.</p>
+          </div>
+
+          <div class="tier-grid">
+            {tiers.map((t) => (
+              <article class:list={['tier-card', { 'tier-card--featured': t.featured }]} aria-labelledby={`tier-${t.tier}`}>
+                {t.featured && <span class="tier-badge">Most centers choose this</span>}
+                <header class={`tier-head tone-${t.tone}`}>
+                  <span class="tier-num">Tier {t.tier}</span>
+                  <h2 id={`tier-${t.tier}`} class="tier-name">{t.name}</h2>
+                  <span class="tier-price">{t.price}</span>
+                </header>
+                <div class="tier-body">
+                  {t.includes && <span class="tier-includes">+ Everything in {t.includes}</span>}
+                  <h3 class="tier-headline">{t.headline}</h3>
+                  <ul class="tier-list">
+                    {t.items.map((item) => <li>{item}</li>)}
+                  </ul>
+                </div>
+                <p class="tier-best"><strong>Best for:</strong> {t.bestFor}</p>
+              </article>
+            ))}
+          </div>
+
+          <div class="plans-foot">
+            <p><strong>Start with the mandate today.</strong> Grow into the rest when you are ready.</p>
+            <a href="#" class="btn btn-founding plans-pill" data-cta="Ask about Growth">Growth brings in new families, not just manages them</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section size-section" aria-labelledby="size-heading">
+      <div class="section-inner centered">
+        <h2 id="size-heading" class="headline">Pricing by center size</h2>
+        <p class="subhead size-intro">Find your size, then pick your plan. Math and Reading count as separate subjects.</p>
+        <div class="size-table-wrap" role="region" aria-labelledby="size-heading" tabindex="0">
+          <table class="size-table">
+            <thead>
+              <tr>
+                <th scope="col">Center size</th>
+                <th scope="col">Attendance</th>
+                <th scope="col">Operations</th>
+                <th scope="col">Retention</th>
+                <th scope="col">Growth</th>
+              </tr>
+            </thead>
+            <tbody>
+              {sizes.map((s) => (
+                <tr>
+                  <th scope="row">{s.range} subjects</th>
+                  {s.prices.map((p) => <td>${p}/mo</td>)}
+                  <td class="size-custom">Custom</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p class="subhead size-note">Growth is built around your center and your goals, so pricing is custom. <a href="#" data-cta="Ask about Growth">Tell us about your center</a> and we will put a plan together. No setup fees, ever.</p>
+      </div>
+    </section>
+
+    <section class="section bg-white closing-section" aria-labelledby="closing-heading">
+      <div class="section-inner centered">
+        <span class="script script-hero" style="color:var(--accent-text)">Ready to Get Started?</span>
+        <h2 id="closing-heading" class="headline">See the whole platform,<br>then pick your plan.</h2>
+        <p class="subhead" style="max-width:600px">Book a call and see the whole platform running a real Kumon center, live.</p>
+        <div class="closing-ctas">
+          <a href="#" class="btn btn-founding" data-cta="Get Started">Get Started</a>
+          <a href="#" class="btn btn-demo" data-cta="Book a Demo">Book a Demo</a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+  <ContactModal />
+</Base>

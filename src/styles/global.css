@@ -5,6 +5,7 @@
   --secondary-dark:#005260;--secondary-text:#007985;
   --tertiary:#4a9ac2;--tertiary-ultra-light:#EBF1F4;
   --accent:#E0712C;--accent-dark:#c55f22;--accent-text:#b85a1a;--accent-light:#f5a06a;--accent-ultra-light:#FDF5F0;
+  --primary-mid:#4a72bd;--indigo:#2f2f8f;--indigo-light:#3b4fb0;--accent-deep:#9c4a14;--success:#1f7a3d;
   --neutral:#57727c;--base:#f2f2f2;--text:#303030;--text-light:#5a5a5a;--white:#fff;
   --font-primary:'Montserrat','Century Gothic',sans-serif;--font-script:'Oooh Baby',cursive;
   --max:1140px;--gap:clamp(80px,10vw,140px);
@@ -222,7 +223,7 @@ body{font-family:var(--font-primary);font-weight:500;color:var(--text);line-heig
 .sp-quote{max-width:380px;font-size:.82rem;color:var(--text-light);font-style:italic;line-height:1.6;padding-left:1rem;border-left:3px solid var(--accent-light)}
 .sp-quote cite{display:block;font-style:normal;font-weight:600;color:var(--text);margin-top:.4rem;font-size:.72rem}
 
-/* STAT TILES - the 36+ / 1 / 0 row above the everything-included grid */
+/* STAT TILES - the 80+ / 1 / 0 row above the everything-included grid */
 .stat-tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-bottom:2.5rem}
 .stat-tile{border-radius:16px;padding:2rem;text-align:center}
 .stat-tile--teal{background:var(--secondary-ultra-light)}
@@ -235,6 +236,9 @@ body{font-family:var(--font-primary);font-weight:500;color:var(--text);line-heig
 /* CARD GRIDS - shared shell for the trust, automation and included-feature cards */
 .card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.3rem}
 .card-grid.tight{grid-template-columns:repeat(auto-fit,minmax(238px,1fr));align-items:start}
+/* Masonry columns for the everything-included cards, whose lists vary in length */
+.card-masonry{columns:238px 4;column-gap:1.3rem}
+.card-masonry>.info-card{break-inside:avoid;margin-bottom:1.3rem}
 .info-card{background:var(--white);border:1px solid rgba(0,0,0,.06);border-radius:16px;padding:1.5rem;box-shadow:0 8px 22px rgba(53,92,170,.06)}
 .info-card.roomy{padding:1.8rem 1.5rem;text-align:left}
 .info-card.shadow-lg{box-shadow:0 8px 24px rgba(53,92,170,.06)}
@@ -261,7 +265,107 @@ body{font-family:var(--font-primary);font-weight:500;color:var(--text);line-heig
 .tick-list li{display:flex;gap:.5rem;align-items:flex-start;font-size:.8rem;color:var(--text);line-height:1.4}
 .tick-rows{display:flex;flex-direction:column;gap:.6rem}
 .tick-row{display:flex;align-items:flex-start;gap:.55rem;font-size:.82rem;color:var(--text);line-height:1.35}
+.tick-row>svg{flex-shrink:0;margin-top:2px}
 .tick-icon{flex-shrink:0;margin-top:3px}
+
+/* PRICE NOTE - "Plans start at $35/month" line under the hero, features and founding CTAs */
+.price-note{font-size:.85rem;color:var(--text-light);margin-top:1rem}
+.price-note strong{color:var(--primary);font-weight:800}
+.price-note a{color:var(--secondary-text);font-weight:700}
+.price-note--spaced{margin:0 0 1.2rem}
+.price-note--light{color:rgba(255,255,255,.85)}
+.price-note--light strong,.price-note--light a{color:#fff}
+
+/* PRICING PAGE */
+.pricing-page{background:var(--base)}
+.pricing-hero{padding-top:calc(var(--gap) + 60px);padding-bottom:3rem;background:linear-gradient(180deg,var(--secondary-ultra-light) 0%,#eef7f9 55%,var(--base) 100%)}
+.pricing-hero-title{font-size:clamp(2rem,4.5vw,3.2rem);max-width:900px;margin:0 auto 1.2rem}
+.pricing-hero-sub{max-width:780px;font-size:1.05rem}
+.pricing-section{padding-top:1rem;padding-bottom:3rem}
+.size-section{padding-top:4rem;padding-bottom:4rem;background:linear-gradient(180deg,var(--base) 0%,var(--secondary-ultra-light) 50%,var(--base) 100%)}
+
+/* Tone fills for the tier card headers. Darkened
+   from the brand tones so white header text clears 4.5:1. */
+.tone-blue{background:linear-gradient(135deg,var(--primary-mid),var(--primary-dark))}
+.tone-indigo{background:linear-gradient(135deg,var(--indigo-light),var(--indigo))}
+.tone-teal{background:linear-gradient(135deg,var(--secondary-text),var(--secondary-dark))}
+.tone-orange{background:linear-gradient(135deg,var(--accent-text),var(--accent-deep))}
+
+/* Plans panel */
+.plans-panel{background:var(--white);border-radius:24px;padding:clamp(1.5rem,4vw,3rem);box-shadow:0 8px 24px rgba(53,92,170,.06)}
+.plans-head{display:flex;justify-content:space-between;align-items:flex-start;gap:2rem;margin-bottom:2.5rem}
+.plans-title{font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:800;color:var(--primary);line-height:1.12}
+.plans-intro{max-width:340px;text-align:right;color:var(--text-light);font-size:.92rem;line-height:1.5}
+
+.tier-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem;align-items:stretch}
+.tier-card{position:relative;display:flex;flex-direction:column;background:var(--white);border:1px solid rgba(0,0,0,.08);border-radius:16px}
+.tier-card--featured{border:3px solid var(--accent-btn);box-shadow:0 12px 30px rgba(206,98,30,.18)}
+.tier-badge{position:absolute;top:-14px;left:50%;transform:translateX(-50%);white-space:nowrap;background:var(--accent-text);color:#fff;font-size:.68rem;font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:.35rem 1rem;border-radius:999px;z-index:1}
+.tier-head{color:#fff;padding:1.2rem 1.3rem 1.1rem;border-radius:15px 15px 0 0}
+.tier-card--featured .tier-head{border-radius:13px 13px 0 0;padding-top:1.5rem}
+.tier-num{display:block;font-size:.7rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase}
+.tier-name{font-size:1.6rem;font-weight:800;line-height:1.2;color:#fff}
+.tier-price{display:block;font-size:1.05rem;font-weight:800}
+.tier-body{padding:1.1rem 1.3rem;flex:1}
+.tier-includes{display:block;font-size:.66rem;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:var(--text-light);margin-bottom:.4rem}
+.tier-headline{font-size:1.02rem;font-weight:800;color:var(--secondary-dark);line-height:1.25;margin-bottom:.8rem}
+.tier-list{list-style:none;display:flex;flex-direction:column;gap:.55rem}
+.tier-list li{position:relative;padding-left:1.4rem;font-size:.86rem;line-height:1.4}
+.tier-list li::before{content:"\2713";position:absolute;left:0;top:0;color:var(--success);font-weight:800}
+.tier-best{border-top:1px solid rgba(0,0,0,.08);padding:.9rem 1.3rem 1.1rem;font-size:.8rem;color:var(--text-light);line-height:1.4}
+.tier-best strong{color:var(--secondary-dark)}
+
+.plans-foot{display:flex;justify-content:space-between;align-items:center;gap:1.5rem;flex-wrap:wrap;border-top:2px solid rgba(0,0,0,.08);margin-top:2rem;padding-top:1.5rem}
+.plans-foot p{flex:1 1 18rem;color:var(--text-light);font-size:1rem}
+.plans-foot strong{color:var(--text)}
+.plans-pill{border-radius:999px;font-size:.9rem;padding:.7rem 1.4rem}
+
+/* Pricing by center size - a plain table so it reads apart from the tier cards above */
+.size-intro{max-width:none}
+.size-table-wrap{overflow-x:auto;border-radius:16px;box-shadow:0 8px 24px rgba(53,92,170,.06);margin:0 auto 2rem}
+.size-table{width:100%;min-width:640px;border-collapse:collapse;background:var(--white);text-align:center}
+.size-table thead th{background:var(--primary);color:#fff;font-weight:800;font-size:1rem;padding:1.2rem 1rem}
+.size-table th:first-child{text-align:left;padding-left:1.5rem}
+.size-table tbody th{font-weight:800;font-size:1rem;color:var(--text)}
+.size-table tbody th,.size-table td{padding:1.2rem 1rem;border-top:1px solid rgba(0,0,0,.06)}
+.size-table tbody tr:nth-child(even){background:#f6fafc}
+.size-table td{font-size:1.1rem;font-weight:800;color:var(--secondary-text);white-space:nowrap}
+.size-table td.size-custom{color:var(--accent-text)}
+.size-note{max-width:760px}
+.size-note a{color:var(--secondary-text);font-weight:700}
+
+/* Closing CTA */
+.closing-section{background:var(--white)}
+.closing-ctas{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+
+@media(max-width:1000px){
+  .tier-grid{grid-template-columns:repeat(2,1fr);row-gap:2rem}
+}
+@media(max-width:700px){
+  .plans-head{flex-direction:column;gap:1rem}
+  .plans-intro{text-align:left;max-width:none}
+  .plans-foot{flex-direction:column;align-items:flex-start}
+  .plans-foot p{flex:none}
+}
+@media(max-width:600px){
+  .tier-grid{grid-template-columns:1fr}
+  .plans-pill{white-space:normal;text-align:center}
+}
+
+/* LEGAL PAGES - privacy and terms markdown */
+.legal{max-width:760px;margin:0 auto;padding:calc(80px + 3rem) 1.5rem 4rem;font-family:var(--font-primary);color:var(--text);line-height:1.7;font-size:1rem}
+.legal h1{color:var(--primary);font-size:clamp(1.8rem,4vw,2.4rem);line-height:1.2;margin:0 0 1rem}
+.legal h2{color:var(--primary-dark);font-size:1.25rem;margin:2.2rem 0 .6rem}
+.legal p,.legal ul{margin:0 0 1rem}
+.legal ul{padding-left:1.4rem}
+.legal li{margin-bottom:.35rem}
+.legal a{color:var(--primary);text-decoration:underline}
+.legal table{width:100%;border-collapse:collapse;margin:0 0 1.2rem;font-size:.92rem}
+.legal th,.legal td{border:1px solid var(--primary-light);padding:.6rem .7rem;text-align:left;vertical-align:top}
+.legal th{background:var(--primary-ultra-light)}
+.legal code{font-size:.85em;background:var(--primary-ultra-light);padding:.05em .3em;border-radius:4px}
+.legal hr{border:0;border-top:1px solid var(--primary-light);margin:1.5rem 0}
+@media (max-width:600px){.legal table{display:block;overflow-x:auto}}
 
 /* FOUNDING */
 .founding-benefits{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin:2.5rem 0}

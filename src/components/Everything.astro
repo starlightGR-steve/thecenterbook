@@ -1,74 +1,195 @@
 ---
 const columns = [
   {
-    key: 'operations',
-    label: 'Operations',
-    titleTone: 'info-card-title--teal',
-    iconTone: 'info-card-icon--teal',
-    iconShadow: '0 5px 14px #00798540',
-    tick: '#007985',
-    items: [
-      'Staff-operated barcode check-in',
-      'Live classroom + row assignments',
-      'Attendance kanban + reconciliation',
-      'Public lobby board (TV display)',
-      'Installable tablet app (PWA)',
-      'Real-time multi-tablet sync',
-      'Library circulation',
-      'Student learning apps',
-    ],
-  },
-  {
-    key: 'communication',
-    label: 'Communication',
-    titleTone: 'info-card-title--warm',
-    iconTone: 'info-card-icon--warm',
-    iconShadow: '0 5px 14px #b85a1a40',
-    tick: '#b85a1a',
-    items: [
-      'Automated pickup SMS + reminders',
-      'Two-way SMS inbox',
-      'Level-up celebration emails',
-      'Progress meeting workflow',
-      'Notifications + alert routing',
-      'Parent portal + email campaigns',
-    ],
-  },
-  {
-    key: 'students',
-    label: 'Students + Data',
+    label: 'Front Desk + Attendance',
     titleTone: 'info-card-title--blue',
     iconTone: 'info-card-icon--blue',
     iconShadow: '0 5px 14px #355caa40',
     tick: '#355caa',
+    icon: '<path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><path d="M10 17l5-5-5-5"/><path d="M15 12H3"/>',
     items: [
-      'Multi-to-multi contact management',
-      'Student journal + goals',
-      'Curriculum + level tracking',
-      'Placement testing + insights dashboard',
-      'Lead pipeline + enrollment CRM',
-      'Public lead forms',
-      'Onboarding automation',
-      'Task management + inbox',
+      'Barcode + scan check-in / check-out',
+      'Live attendance board: expected, in, pickup, out, no-show',
+      'Self-serve check-in kiosk',
+      'Public lobby board for the waiting room (TV)',
+      'Automatic no-show detection + “We Missed You”',
+      'Absences, vacations + make-up tracking',
+      'Per-week schedule overrides',
+      'Automatic weekly attendance reconciliation',
     ],
   },
   {
-    key: 'platform',
-    label: 'Platform + Admin',
+    label: 'Live Classroom',
+    titleTone: 'info-card-title--teal',
+    iconTone: 'info-card-icon--teal',
+    iconShadow: '0 5px 14px #00798540',
+    tick: '#007985',
+    icon: '<rect x="3" y="3" width="8" height="8" rx="1"/><rect x="13" y="3" width="8" height="8" rx="1"/><rect x="3" y="13" width="8" height="8" rx="1"/><rect x="13" y="13" width="8" height="8" rx="1"/>',
+    items: [
+      'Visual classroom board by row + seat',
+      'Per-student cards: notes, flags, checklists',
+      'Daily student + teacher seating',
+      'In-session testing setup + tracking',
+      'Classroom layout designer',
+      'Plan-next-visit + recurring items',
+      'Observation notes with manager routing',
+    ],
+  },
+  {
+    label: 'Students + Records',
+    titleTone: 'info-card-title--blue',
+    iconTone: 'info-card-icon--blue',
+    iconShadow: '0 5px 14px #355caa40',
+    tick: '#355caa',
+    icon: '<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>',
+    items: [
+      'Student profiles on one roster',
+      'Multi-to-multi family + contact links',
+      'Separate communication vs billing parent',
+      'Permissions, media release + medical notes',
+      'Typed student journal',
+      'Per-student goals',
+      'Full audit trail on every change',
+      'Library circulation',
+    ],
+  },
+  {
+    label: 'Levels, Tests + Progress',
+    titleTone: 'info-card-title--teal',
+    iconTone: 'info-card-icon--teal',
+    iconShadow: '0 5px 14px #00798540',
+    tick: '#007985',
+    icon: '<circle cx="12" cy="8" r="7"/><path d="M8.21 13.89L7 23l5-3 5 3-1.21-9.12"/>',
+    items: [
+      'Kumon level tracking by subject',
+      'Level-up milestones + history',
+      'Auto level-up on a passed test',
+      'Test records + placement tests',
+      'ASHR tier classification (Platinum–Bronze)',
+      'Progress analytics: pass rate, velocity, tenure',
+      'At-risk student alerts',
+      'Learning apps for students',
+    ],
+  },
+  {
+    label: 'Parent Communication',
     titleTone: 'info-card-title--mixed',
     iconTone: 'info-card-icon--mixed',
     iconShadow: '0 5px 14px #4a9ac240',
     tick: '#4a9ac2',
+    icon: '<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>',
     items: [
-      'Center website + funnel',
-      'Student + staff scheduling',
-      'Staff timeclock + hour export',
-      'Booking calendar',
-      'Staff "Me" dashboard',
+      'Automatic pickup texts + 5-minute reminders',
+      'Two-way SMS inbox + threads',
+      '“Quick word at pickup” touchpoints',
+      'Bathroom-request texts',
+      'SMS consent + STOP/START compliance',
+      'Level-up, milestone + progress emails',
+      'Notifications + configurable alert routing',
+    ],
+  },
+  {
+    label: 'Parent Portal',
+    titleTone: 'info-card-title--mixed',
+    iconTone: 'info-card-icon--mixed',
+    iconShadow: '0 5px 14px #4a9ac240',
+    tick: '#4a9ac2',
+    icon: '<rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/>',
+    items: [
+      'Branded parent login + onboarding',
+      'Dashboard: levels, schedule, goals, meetings, library',
+      'Secure, identity-scoped access',
+      'Parent self-service contact updates',
+      'One-click portal invites',
+      'Center content pages for families',
+    ],
+  },
+  {
+    label: 'Scheduling + Staff',
+    titleTone: 'info-card-title--teal',
+    iconTone: 'info-card-icon--teal',
+    iconShadow: '0 5px 14px #00798540',
+    tick: '#007985',
+    icon: '<rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>',
+    items: [
+      'Staff records, roles + employment',
+      'Recurring shifts + coverage grid',
+      'Staff seats by classroom zone',
+      'Timeclock: clock in/out, manual, reasons',
+      'Payroll summary + CSV export',
+      'Personal “Me” dashboard',
+      'Visual class scheduler',
+      'Booking calendar + appointments',
+      'Online booking + parent self-scheduling',
+    ],
+  },
+  {
+    label: 'Growth + Enrollment',
+    titleTone: 'info-card-title--warm',
+    iconTone: 'info-card-icon--warm',
+    iconShadow: '0 5px 14px #b85a1a40',
+    tick: '#b85a1a',
+    icon: '<path d="M23 6l-9.5 9.5-5-5L1 18"/><path d="M17 6h6v6"/>',
+    items: [
+      'Center funnel website + local SEO',
+      'Public lead + enrollment forms',
+      'Lead pipeline + enrollment CRM',
+      'One record from inquiry to enrolled',
+      'Match-only intake with staff alerts',
+      'Progress-meeting booking workflow',
+      'Discovery assessment + onboarding',
+      'Lead-recovery email journeys',
+    ],
+  },
+  {
+    label: 'Billing + Insights',
+    titleTone: 'info-card-title--warm',
+    iconTone: 'info-card-icon--warm',
+    iconShadow: '0 5px 14px #b85a1a40',
+    tick: '#b85a1a',
+    icon: '<rect x="1" y="4" width="22" height="16" rx="2"/><path d="M1 10h22"/>',
+    items: [
+      'Card + bank payment processing',
+      'Recurring billing schedules',
+      'One-off charges + refunds',
+      'Failed-payment follow-up queue',
+      'Insights: attendance, enrollment, billing',
+      'ASHR + enrollment reporting',
+    ],
+  },
+  {
+    label: 'Automations',
+    titleTone: 'info-card-title--mixed',
+    iconTone: 'info-card-icon--mixed',
+    iconShadow: '0 5px 14px #4a9ac240',
+    tick: '#4a9ac2',
+    icon: '<path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>',
+    items: [
+      'Birthday cards',
+      'Level-up card + new-bag prompt',
+      'Test-pass certificates',
+      'Progress-meeting prep + follow-up',
+      'Annual grade increase',
+      'Nightly background jobs + marketing-list sync',
+    ],
+  },
+  {
+    label: 'Platform + Admin',
+    titleTone: 'info-card-title--blue',
+    iconTone: 'info-card-icon--blue',
+    iconShadow: '0 5px 14px #355caa40',
+    tick: '#355caa',
+    icon: '<path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6"/>',
+    items: [
+      'Dedicated database per center (full isolation)',
+      'White-label: your name, logo, colors, domain',
       'Roles + permission matrix',
-      'White-label + center settings',
-      'Dedicated database per center',
-      'Holiday + closed-date management',
+      'Center settings: hours, capacity, timezone',
+      'Holiday / closed-date overlay',
+      'Editable SMS templates',
+      'Lobby announcements',
+      'Task inbox (multi-assignee)',
+      'Installable tablet app (PWA) + multi-tablet sync',
     ],
   },
 ];
@@ -83,7 +204,7 @@ const columns = [
   <div class="section-inner">
     <div class="stat-tiles">
       <div class="stat-tile stat-tile--teal">
-        <div class="stat-tile-num">36+</div>
+        <div class="stat-tile-num">80+</div>
         <div class="stat-tile-label">Built-in Features</div>
         <div class="stat-tile-note">Not integrations. Built into one platform.</div>
       </div>
@@ -98,23 +219,12 @@ const columns = [
         <div class="stat-tile-note">No duct tape. No third-party apps.</div>
       </div>
     </div>
-    <div class="card-grid tight">
+    <div class="card-masonry">
       {columns.map((col) => (
         <div class="info-card shadow-lg">
           <div class="info-card-head ruled">
             <div class={`info-card-icon ${col.iconTone}`} style={`box-shadow:${col.iconShadow}`}>
-              {col.key === 'operations' && (
-                <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>
-              )}
-              {col.key === 'communication' && (
-                <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-              )}
-              {col.key === 'students' && (
-                <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-              )}
-              {col.key === 'platform' && (
-                <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="21" x2="14" y1="4" y2="4"/><line x1="10" x2="3" y1="4" y2="4"/><line x1="21" x2="12" y1="12" y2="12"/><line x1="8" x2="3" y1="12" y2="12"/><line x1="21" x2="16" y1="20" y2="20"/><line x1="12" x2="3" y1="20" y2="20"/><line x1="14" x2="14" y1="2" y2="6"/><line x1="8" x2="8" y1="10" y2="14"/><line x1="16" x2="16" y1="18" y2="22"/></svg>
-              )}
+              <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" set:html={col.icon} />
             </div>
             <div class={`info-card-title lg ${col.titleTone}`}>{col.label}</div>
           </div>
@@ -130,6 +240,7 @@ const columns = [
       ))}
     </div>
     <div class="centered" style="margin-top:2.5rem">
+      <p class="price-note price-note--spaced">Plans start at <strong>$35/month</strong>. <a href="/pricing">See pricing</a></p>
       <a href="#" class="btn btn-founding btn-full" data-cta="Get Started">Get Started</a>
     </div>
   </div>

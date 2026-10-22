@@ -1,29 +1,36 @@
 ---
 import '../styles/global.css';
+// Defaults are the home page's; other pages pass their own title, description and path.
+const {
+  title = 'The Center Book | Software for Kumon &amp; Tutoring Center Owners',
+  description = 'All-in-one software for Kumon and tutoring center owners: attendance, live-class tracking, a parent portal, a lead-capturing funnel site, and automations that run your center. Works alongside K-SIS. Book a demo.',
+  path = '/',
+} = Astro.props;
+const canonical = `https://www.thecenterbook.com${path}`;
 ---
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Center Book | Software for Kumon &amp; Tutoring Center Owners</title>
-<meta name="description" content="All-in-one software for Kumon and tutoring center owners: attendance, live-class tracking, a parent portal, a lead-capturing funnel site, and automations that run your center. Works alongside K-SIS. Book a demo.">
+<title set:html={title} />
+<meta name="description" content={description}>
 <meta name="keywords" content="tutoring center software, Kumon center management software, learning center software, attendance software for tutoring centers, parent portal software, tutoring center CRM, center management platform">
 <meta name="robots" content="index, follow">
 <meta name="author" content="The Center Book LLC">
 <meta name="theme-color" content="#355caa">
-<link rel="canonical" href="https://www.thecenterbook.com/">
+<link rel="canonical" href={canonical}>
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
 <link rel="icon" type="image/png" sizes="512x512" href="/favicon-512.png">
 <link rel="apple-touch-icon" href="/favicon-180.png">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="The Center Book">
-<meta property="og:title" content="The Center Book | Software for Kumon &amp; Tutoring Center Owners">
+<meta property="og:title" content={title.replace('&amp;', '&')}>
 <meta property="og:description" content="One system to run your whole center: attendance, live class, parent portal, funnel site, and automations. Built for Kumon and tutoring center owners.">
-<meta property="og:url" content="https://www.thecenterbook.com/">
+<meta property="og:url" content={canonical}>
 <meta property="og:image" content="https://www.thecenterbook.com/og-image.jpg">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="The Center Book | Software for Kumon &amp; Tutoring Center Owners">
+<meta name="twitter:title" content={title.replace('&amp;', '&')}>
 <meta name="twitter:description" content="One system to run your whole center: attendance, live class, parent portal, funnel site, and automations.">
 <meta name="twitter:image" content="https://www.thecenterbook.com/og-image.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
