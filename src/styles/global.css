@@ -67,12 +67,19 @@ body{font-family:var(--font-primary);font-weight:500;color:var(--text);line-heig
 /* Two-class selector (0,2,0) so it outranks `.nav-logo img` (0,1,1), which sets
    display:block and would otherwise force both logos to render at once. */
 .nav-logo .nav-logo-mark{display:none}
-.nav-links{display:flex;align-items:center;gap:2rem;list-style:none}
+.nav-links{display:flex;align-items:center;gap:2rem}
+.nav-menu{display:flex;align-items:center;gap:2rem;list-style:none}
 /* :not(.btn) so this generic link rule (0,1,1) cannot out-specify `.btn`
    (0,1,0). Without it the nav pill needed its own duplicate paint rule, which
    is exactly how the oranges drifted apart. */
 .nav-links a:not(.btn){text-decoration:none;color:var(--text);font-weight:500;font-size:.85rem}.nav-links a:not(.btn):hover{color:var(--secondary-text)}
 .nav-links .btn{white-space:nowrap}
+/* Mobile menu button - hidden on desktop, shown at ≤900px below */
+.nav-toggle{display:none;align-items:center;justify-content:center;width:48px;height:48px;flex-shrink:0;border:1.5px solid var(--primary-light);border-radius:8px;background:var(--white);color:var(--primary);cursor:pointer}
+.nav-toggle:hover{border-color:var(--primary)}
+.nav-toggle-close{display:none}
+.nav.menu-open .nav-toggle-open{display:none}
+.nav.menu-open .nav-toggle-close{display:block}
 
 /* DECORATIVE */
 .blob{position:absolute;border-radius:50%;pointer-events:none;z-index:0}
@@ -436,8 +443,12 @@ body{font-family:var(--font-primary);font-weight:500;color:var(--text);line-heig
   .feature-split{grid-template-columns:1fr;gap:2rem}.feature-split.reverse .feat-text{order:1}.feature-split.reverse .feat-visual{order:2}
   .who-cards,.founding-benefits{grid-template-columns:1fr}.included-visual{grid-template-columns:1fr}
   .sp-inner{gap:1.5rem}.sp-div{display:none}
-  /* Keep the header CTA on small screens; hide only the other nav links. */
-  .nav-links li:not(.nav-item-cta){display:none}
+  /* Page links collapse into a dropdown under the bar; Book a Demo stays put. */
+  .nav-links{gap:.75rem}
+  .nav-toggle{display:flex}
+  .nav-menu{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;align-items:stretch;gap:0;background:var(--white);border-bottom:1px solid rgba(53,92,170,.1);box-shadow:0 12px 24px rgba(0,0,0,.08);padding:.5rem 0}
+  .nav.menu-open .nav-menu{display:flex}
+  .nav-menu a:not(.btn){display:block;padding:.9rem 1.5rem;font-size:1rem;font-weight:600}
   .footer-inner{grid-template-columns:1fr}.blob,.dots{display:none}
   .stat-tiles{grid-template-columns:1fr}
 }
@@ -458,6 +469,7 @@ body{font-family:var(--font-primary);font-weight:500;color:var(--text);line-heig
      .btn/.btn-founding fill, type size and shape are untouched. */
   .nav-inner{padding:.8rem 1rem}
   .nav-links .btn{padding:.75rem 1.1rem}
+  .nav-links{gap:.5rem}
   /* The lead testimonial sits text beside the portrait on desktop via a 280px
      floor. On narrow screens that floor forced the page's minimum layout width
      (shrink-to-fit), and merely zeroing it squeezed the quote into a ~100px
