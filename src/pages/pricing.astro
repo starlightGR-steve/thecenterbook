@@ -77,6 +77,76 @@ const sizes = [
   { range: '251 to 350', prices: [75, 95, 125] },
   { range: '351+', prices: [95, 125, 175] },
 ];
+// Full feature matrix. `from` is the first plan that turns a feature on
+// (0 Attendance, 1 Operations, 2 Retention, 3 Growth); every plan after it includes it too.
+const plans = ['Attendance', 'Operations', 'Retention', 'Growth'];
+const matrix = [
+  {
+    group: 'Foundation, every plan',
+    rows: [
+      ['Multi-to-multi student and family records', 0],
+      ['Separate communication and billing contacts', 0],
+      ['Built-in consent and permissions, no forms (media, bathroom, pickup)', 0],
+      ['SMS consent with STOP/START and logged history', 0],
+      ['Role-based staff permissions and custom roles', 0],
+      ['Per-center configuration (hours, timezone, classroom layout)', 0],
+      ['Background attendance reconciliation', 0],
+    ],
+  },
+  {
+    group: 'Operations, run the floor',
+    rows: [
+      ['Barcode check-in and check-out kanban', 0],
+      ['Awaiting-pickup and no-show tracking', 0],
+      ['Staff timeclock (clock in and out)', 0],
+      ['Attendance and enrollment reporting', 0],
+      ['Tuition billing and payments (card and bank via Stripe)', 0],
+      ['Visual scheduler (class, capacity, zones)', 1],
+      ['Staff hours and coverage grid', 1],
+      ['Booking (services, bookable staff, hours, time off)', 1],
+      ['Library circulation', 1],
+    ],
+  },
+  {
+    group: 'Retention and instruction, keep families',
+    rows: [
+      ['Automatic parent pickup SMS and two-way inbox', 0],
+      ['Parent portal login (child data, schedule, progress)', 1],
+      ['Family portal content pages (About, Method, Programs, FAQ, Resources, Policies)', 1],
+      ['Progress-meeting booking (parent self-book and history)', 1],
+      ['Live Class: notes to chart, flags, checklists, zones', 2],
+      ['In-session testing and results routing', 2],
+      ['Kumon level tracking and level-up milestones', 2],
+      ['Learning Apps for students', 2],
+      ['Classroom observations and student journal', 2],
+      ['Events and RSVP management', 2],
+      ['Business Insights: ASHR, at-risk, tenure vs performance', 2],
+    ],
+  },
+  {
+    group: 'Growth, fill the center',
+    rows: [
+      ['Public funnel landing page, SEO-optimized, on your own domain', 3],
+      ['Local SEO', 3],
+      ['Public lead-capture form feeding the pipeline', 3],
+      ['Lead pipeline and sales CRM', 3],
+      ['Discovery assessment interview', 3],
+      ['Kumon-native onboarding (eSign and assessment scheduler)', 3],
+      ['One record from first inquiry to enrolled', 3],
+    ],
+  },
+  {
+    group: 'Automations, across every plan',
+    rows: [
+      ['Pickup, no-show and permission SMS automations', 0],
+      ['Automation safeguards (self-monitoring alerts)', 0],
+      ['Staff task automations (birthdays, rewards, bags, grade roll-up)', 1],
+      ['Welcome-onboarding email journey', 1],
+      ['Level-up and progress-journey email journeys', 2],
+      ['Lead nurture and assessment-recovery journeys', 3],
+    ],
+  },
+] as const;
 ---
 <Base
   title="Pricing | The Center Book"
@@ -160,6 +230,43 @@ const sizes = [
           </table>
         </div>
         <p class="subhead size-note">Growth is built around your center and your goals, so pricing is custom. <a href="#" data-cta="Ask about Growth">Tell us about your center</a> and we will put a plan together. No setup fees, ever.</p>
+      </div>
+    </section>
+
+    <section class="section bg-white matrix-section" aria-labelledby="matrix-heading">
+      <div class="section-inner">
+        <div class="centered matrix-intro">
+          <span class="eyebrow" style="color:var(--secondary-text)">What's inside</span>
+          <span class="script script-lg" style="color:var(--accent-text)">Every Feature, and Where It Turns On</span>
+          <h2 id="matrix-heading" class="headline">The full feature list.</h2>
+          <p class="subhead">Every capability in the platform, and the plan that turns it on. Each plan includes everything in the plans before it.</p>
+        </div>
+        <div class="fmatrix-wrap" role="region" aria-labelledby="matrix-heading" tabindex="0">
+          <table class="fmatrix">
+            <thead>
+              <tr>
+                <th scope="col" class="fmatrix-feature">Feature</th>
+                {plans.map((plan, i) => <th scope="col" class={`fm-${i}`}>{plan}</th>)}
+              </tr>
+            </thead>
+            {matrix.map((g) => (
+              <tbody>
+                <tr class="fmatrix-group"><th scope="colgroup" colspan="5">{g.group}</th></tr>
+                {g.rows.map(([feature, from]) => (
+                  <tr>
+                    <th scope="row">{feature}</th>
+                    {plans.map((_, i) => (
+                      <td class:list={[i >= from ? 'fm-yes' : 'fm-no', { 'fm-hl': i === 2 }]}>
+                        <span aria-hidden="true">{i >= from ? '✓' : '−'}</span>
+                        <span class="sr-only">{i >= from ? 'Included' : 'Not included'}</span>
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            ))}
+          </table>
+        </div>
       </div>
     </section>
 
